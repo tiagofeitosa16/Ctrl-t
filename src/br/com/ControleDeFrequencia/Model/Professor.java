@@ -15,8 +15,8 @@ import java.util.Calendar;
 public class Professor extends Pessoa {
 
     private String Siape;
-    private Titulo titulo;
-    private Cargo cargos;
+    private int titulo;
+    private int cargo;
     private Calendar data_cadastramento;
 
     @Override
@@ -33,13 +33,12 @@ public class Professor extends Pessoa {
         return true;
     }
 
-    public Cargo getCargos() {
-        return cargos;
+    public int getCargo() {
+        return cargo;
     }
 
-    public void setCargos(int id) {
-        this.cargos = new Cargo();
-        this.cargos.setId(id);
+    public void setCargo(int id) {
+        this.cargo = id;
     }
 
     public String getSiape() {
@@ -50,19 +49,16 @@ public class Professor extends Pessoa {
         this.Siape = Siape;
     }
 
-    public Titulo getTitulo() {
+    public int getTitulo() {
         return titulo;
     }
 
     public void setTitulo(int id) {
-        this.titulo = new Titulo();
-        this.titulo.setId(id);
-                
+        this.titulo = id;            
     }
 
     public Calendar getData_cadastramento() {
         return data_cadastramento;
     }
-
     
 }

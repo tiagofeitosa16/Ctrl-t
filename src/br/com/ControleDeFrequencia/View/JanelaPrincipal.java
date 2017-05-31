@@ -31,8 +31,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemProfessores = new javax.swing.JMenuItem();
-        jMenuItemTitulos = new javax.swing.JMenuItem();
-        jMenuItemCargos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuManutencao = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
@@ -55,24 +53,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuItemProfessores);
-
-        jMenuItemTitulos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemTitulos.setText("TÍtulos");
-        jMenuItemTitulos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemTitulosActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemTitulos);
-
-        jMenuItemCargos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItemCargos.setText("Cargos");
-        jMenuItemCargos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItemCargosActionPerformed(evt);
-            }
-        });
-        jMenuCadastros.add(jMenuItemCargos);
         jMenuCadastros.add(jSeparator1);
 
         jMenuBar1.add(jMenuCadastros);
@@ -122,18 +102,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItemProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfessoresActionPerformed
         // TODO add your handling code here:
-        new JanCad_Professor().setVisible(true);
+        new Janela_Generica().setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
-
-    private void jMenuItemTitulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTitulosActionPerformed
-        // TODO add your handling code here:
-        new JanCad_Titulo().setVisible(true);
-    }//GEN-LAST:event_jMenuItemTitulosActionPerformed
-
-    private void jMenuItemCargosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCargosActionPerformed
-        // TODO add your handling code here:
-        new JanCad_Cargo().setVisible(true);
-    }//GEN-LAST:event_jMenuItemCargosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,12 +144,10 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItemCadastrar;
-    private javax.swing.JMenuItem jMenuItemCargos;
     private javax.swing.JMenuItem jMenuItemEmEspera;
     private javax.swing.JMenuItem jMenuItemMudarUsuario;
     private javax.swing.JMenuItem jMenuItemProfessores;
     private javax.swing.JMenuItem jMenuItemSairSistema;
-    private javax.swing.JMenuItem jMenuItemTitulos;
     private javax.swing.JMenuItem jMenuItemTrocarSenha;
     private javax.swing.JMenu jMenuManutencao;
     private javax.swing.JMenu jMenuSair;
