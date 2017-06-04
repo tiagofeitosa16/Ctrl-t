@@ -7,21 +7,20 @@ package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlProfessor;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario
  */
-public class JanCad_Professor extends javax.swing.JFrame {    
+public class JanCad_Professor extends javax.swing.JFrame {
+
     /**
      * Creates new form JanCad_Professor
      */
-    
-  
     public HashMap infoJanela = null;
-    
-    
+
     public JanCad_Professor() {
         initComponents();
     }
@@ -42,9 +41,37 @@ public class JanCad_Professor extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jTFSiape = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter siape= new javax.swing.text.MaskFormatter("#######");
+            siape.setPlaceholderCharacter('_');
+            jTFSiape = new javax.swing.JFormattedTextField(siape);
+        }
+        catch (Exception e){
+        }
         jTFCPF = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter cpf= new javax.swing.text.MaskFormatter("###.###.###-##");
+            cpf.setPlaceholderCharacter('_');
+            jTFCPF = new javax.swing.JFormattedTextField(cpf);
+        }
+        catch (Exception e){
+        }
         jFTNascimento = new javax.swing.JFormattedTextField();
+        try{ 
+            javax.swing.text.MaskFormatter nascimento= new javax.swing.text.MaskFormatter("##/##/####");
+            nascimento.setPlaceholderCharacter('_');
+            jFTNascimento = new javax.swing.JFormattedTextField(nascimento);
+        }
+        catch (Exception e){
+        }
         jFTDataCadastro = new javax.swing.JFormattedTextField();
+        try{ 
+            javax.swing.text.MaskFormatter dataCadastro= new javax.swing.text.MaskFormatter("##/##/####");
+            dataCadastro.setPlaceholderCharacter('_');
+            jFTDataCadastro = new javax.swing.JFormattedTextField(dataCadastro);
+        }
+        catch (Exception e){
+        }
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -114,6 +141,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
             }
         });
 
+        jFTNascimento.setToolTipText("");
         jFTNascimento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jFTNascimentoActionPerformed(evt);
@@ -146,7 +174,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Título:");
 
-        jCBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Efetivo", "Temporário", " " }));
+        jCBCargo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Efetivo", "Temporário" }));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Vínculo:");
@@ -312,32 +340,47 @@ public class JanCad_Professor extends javax.swing.JFrame {
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         // TODO add your handling code here:
-        if(!(this.jTFNome.getText().isEmpty()) || !(this.jTFCPF.getText().isEmpty()) || !(this.jTFSiape.getText().isEmpty())){
+        if (!(this.jTFNome.getText().isEmpty()) && !(this.jTFCPF.getText().equals("___.___.___-__")) && !(this.jTFSiape.getText().equals("_______")) && (jRBMasculino.isSelected() || jRBFeminino.isSelected()) && !(this.jCBTitulo.getSelectedIndex()==0) && !(this.jCBCargo.getSelectedIndex()==0) && !(this.jFTNascimento.getText().equals("__/__/____"))) {
+            if (!isCPF(this.jTFCPF.getText())) {
+                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! CPF inválido!");
+                return;
+            }
+            try {
+                Integer.parseInt(this.jTFSiape.getText());
+                if(this.jTFSiape.getText().length()!=7){
+                    JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! Siape inválido!");
+                    return;
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! Siape inválido!");
+                return;
+            }
+            //if(this.jTFSiape.getText().isNumber())
             this.infoJanela = new HashMap();
-            
+
             this.infoJanela.put("nome", this.jTFNome.getText());
-            this.infoJanela.put("cpf",  this.jTFCPF.getText());
-            this.infoJanela.put("siape", this.jTFSiape.getText());    
-            
-            if (jRBMasculino.isSelected()){
+            this.infoJanela.put("cpf", this.jTFCPF.getText());
+            this.infoJanela.put("siape", this.jTFSiape.getText());
+
+            if (jRBMasculino.isSelected()) {
                 this.infoJanela.put("sexo", "Masculino");
-            }else if (jRBFeminino.isSelected()){
+            } else if (jRBFeminino.isSelected()) {
                 this.infoJanela.put("sexo", "Feminino");
             }
-            
+
             this.infoJanela.put("titulo", this.jCBTitulo.getSelectedIndex());
             this.infoJanela.put("cargo", this.jCBCargo.getSelectedIndex());
             this.infoJanela.put("nascimento", this.jFTNascimento.getText());
-            
+
             ControlProfessor cp = new ControlProfessor();
-            if (cp.ControlInserir(infoJanela)){
+            if (cp.ControlInserir(infoJanela)) {
                 JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
             }
             dispose();
-        }else{
-            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios!");
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (em negrito)!");
         }
     }//GEN-LAST:event_jBtnSalvarActionPerformed
 
@@ -349,6 +392,61 @@ public class JanCad_Professor extends javax.swing.JFrame {
     private void jCBTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBTituloActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBTituloActionPerformed
+
+    private boolean isCPF(String CPF) {
+        if (CPF.equals("00000000000") || CPF.equals("11111111111")
+                || CPF.equals("22222222222") || CPF.equals("33333333333")
+                || CPF.equals("44444444444") || CPF.equals("55555555555")
+                || CPF.equals("66666666666") || CPF.equals("77777777777")
+                || CPF.equals("88888888888") || CPF.equals("99999999999")
+                || (CPF.length() != 11)) {
+            return false;
+        }
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+// "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+        try {
+// Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i = 0; i < 9; i++) {
+// converte o i-esimo caractere do CPF em um numero:
+// por exemplo, transforma o caractere '0' no inteiro 0         
+// (48 eh a posicao de '0' na tabela ASCII)         
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig10 = '0';
+            } else {
+                dig10 = (char) (r + 48); // converte no respectivo caractere numerico
+            }
+// Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for (i = 0; i < 10; i++) {
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig11 = '0';
+            } else {
+                dig11 = (char) (r + 48);
+            }
+
+// Verifica se os digitos calculados conferem com os digitos informados.
+            return (dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10));
+        } catch (InputMismatchException erro) {
+            return false;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar;
