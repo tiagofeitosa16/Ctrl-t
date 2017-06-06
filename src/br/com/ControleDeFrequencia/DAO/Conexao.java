@@ -33,7 +33,7 @@ public class Conexao {
     
     public Connection getConexao(){
         try{
-            conexao = DriverManager.getConnection("jdbc:mysql://localhost/Dados","root","");
+            conexao = DriverManager.getConnection("jdbc:mysql://localhost/Dados","root","root");
             return conexao;
         } catch(SQLException e){
             throw new RuntimeException(e);
