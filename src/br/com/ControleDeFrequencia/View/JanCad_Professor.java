@@ -355,11 +355,13 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! Siape inválido!");
                 return;
             }
+            String cpf = this.jTFCPF.getText();
+            cpf = cpf.replaceAll("[^0-9]","");
             //if(this.jTFSiape.getText().isNumber())
             this.infoJanela = new HashMap();
 
             this.infoJanela.put("nome", this.jTFNome.getText());
-            this.infoJanela.put("cpf", this.jTFCPF.getText());
+            this.infoJanela.put("cpf", cpf);
             this.infoJanela.put("siape", this.jTFSiape.getText());
 
             if (jRBMasculino.isSelected()) {
@@ -368,7 +370,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 this.infoJanela.put("sexo", "Feminino");
             }
 
-            this.infoJanela.put("titulo", this.jCBTitulo.getSelectedIndex());
+            this.infoJanela.put("vinculo", this.jCBTitulo.getSelectedIndex());
             this.infoJanela.put("cargo", this.jCBCargo.getSelectedIndex());
             this.infoJanela.put("nascimento", this.jFTNascimento.getText());
 

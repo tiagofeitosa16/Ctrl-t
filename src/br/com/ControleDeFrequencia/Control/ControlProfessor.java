@@ -39,7 +39,7 @@ public class ControlProfessor implements ControlPadrao {
             this.professor.setSexo(Sexo.Feminino);
         }
         
-        this.professor.setTitulo((int) map.get("titulo"));
+        this.professor.setVinculo((int) map.get("vinculo"));
         this.professor.setCargo((int) map.get("cargo"));
         
         try{
