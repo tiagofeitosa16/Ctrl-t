@@ -35,7 +35,7 @@ public class Janela_Generica extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButtonInserir.setText("Inserir");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +66,8 @@ public class Janela_Generica extends javax.swing.JFrame {
                 jButtonSairActionPerformed(evt);
             }
         });
+
+        jScrollPane2.setForeground(new java.awt.Color(49, 55, 67));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
