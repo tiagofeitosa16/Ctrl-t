@@ -34,8 +34,8 @@ public class ProfessorDAO implements PadraoDAO{
             stmt.setDate(4, new java.sql.Date(this.professor.getData_nascimento().getTimeInMillis()));
             stmt.setDate(5, new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
             stmt.setString(6, this.professor.getSiape());
-            stmt.setInt(7, this.professor.getVinculo());
-            stmt.setInt(8, this.professor.getCargo());
+            stmt.setInt(7, this.professor.getTitulo());
+            stmt.setInt(8, this.professor.getVinculo());
             
             stmt.execute();
             Conexao.getInstance().fechaConexao(stmt);
@@ -62,8 +62,8 @@ public class ProfessorDAO implements PadraoDAO{
             stmt.setString(3, this.professor.getSexo().getSexo());
             stmt.setDate(4, new java.sql.Date(this.professor.getData_nascimento().getTimeInMillis()));
             stmt.setString(5, this.professor.getSiape());
-            stmt.setInt(6, this.professor.getVinculo());
-            stmt.setInt(7, this.professor.getCargo());
+            stmt.setInt(6, this.professor.getTitulo());
+            stmt.setInt(7, this.professor.getVinculo());
             stmt.setInt(8, this.professor.getId());
             
             stmt.execute();

@@ -370,8 +370,8 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 this.infoJanela.put("sexo", "Feminino");
             }
 
-            this.infoJanela.put("vinculo", this.jCBTitulo.getSelectedIndex());
-            this.infoJanela.put("cargo", this.jCBCargo.getSelectedIndex());
+            this.infoJanela.put("titulo", this.jCBTitulo.getSelectedIndex());
+            this.infoJanela.put("vinculo", this.jCBCargo.getSelectedIndex());
             this.infoJanela.put("nascimento", this.jFTNascimento.getText());
 
             ControlProfessor cp = new ControlProfessor();
