@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="jBGSexo">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.ButtonGroup()"/>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jBGSexo.add(jRBMasculino);&#xa;jBGSexo.add(jRBFeminino);"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
     <Property name="title" type="java.lang.String" value="Cadastro de Professor"/>
@@ -249,6 +257,9 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jTFSiape">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTFSiapeActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xd;&#xa;    javax.swing.text.MaskFormatter siape= new javax.swing.text.MaskFormatter(&quot;#######&quot;);&#xd;&#xa;    siape.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;    jTFSiape = new javax.swing.JFormattedTextField(siape);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
           </AuxValues>

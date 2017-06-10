@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,11 +28,26 @@ public class ControlProfessor implements ControlPadrao {
     @Override
     public boolean ControlInserir(Object objeto){
         HashMap map = (HashMap) objeto;
+        String siape = map.get("siape").toString();
+        String cpf = map.get("cpf").toString();
+        cpf = cpf.replaceAll("[^0-9]","");
         
         this.professor = new Professor();
         this.professor.setNome(map.get("nome").toString());
-        this.professor.setCpf(map.get("cpf").toString());
-        this.professor.setSiape(map.get("siape").toString());
+        
+        if(this.professor.validarSiape(siape)) {
+            this.professor.setSiape(siape);
+        } else {
+            JOptionPane.showMessageDialog(null, "Siape inválido!");
+            return false;
+        }
+        
+        if(!this.professor.ValidarCPF(cpf)) {
+            JOptionPane.showMessageDialog(null, "CPF inválido!");
+            return false;
+        } else {
+            this.professor.setCpf(cpf);
+        }
         
         if(map.get("sexo").toString() == "Masculino"){
             this.professor.setSexo(Sexo.Masculino);
