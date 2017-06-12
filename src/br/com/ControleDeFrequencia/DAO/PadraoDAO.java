@@ -5,6 +5,9 @@
  */
 package br.com.ControleDeFrequencia.DAO;
 
+import br.com.ControleDeFrequencia.Model.Professor;
+import java.util.List;
+
 /**
  *
  * @author Usuario
@@ -14,6 +17,6 @@ public interface PadraoDAO {
     public boolean inserir(Object objeto);
     public boolean alterar(Object objeto);
     public boolean deletar(int id);
-    public Object selecionar(Object objeto);
+    public List<Professor> listar();
 
 }

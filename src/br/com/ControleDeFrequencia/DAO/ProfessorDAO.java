@@ -7,9 +7,12 @@ package br.com.ControleDeFrequencia.DAO;
 
 import br.com.ControleDeFrequencia.Model.Professor;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  *
@@ -98,8 +101,35 @@ public class ProfessorDAO implements PadraoDAO{
     }
     
     @Override
-    public Object selecionar(Object objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public List<Professor> listar() {
+        try {
+            List<Professor> professores = new ArrayList<Professor>();
+            sql =  "select * from professor";
+            
+            
+            stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
+            
+            ResultSet rs = stmt.executeQuery();
+            
+            while (rs.next()) {                
+                Professor prof = new Professor();
+                prof.setId(rs.getInt("id_professor"));
+                prof.setSiape(rs.getString("siape"));
+                prof.setNome(rs.getString("nome"));
+                
+                
+                professores.add(prof);
+            }
+            rs.close();
+            Conexao.getInstance().fechaConexao(stmt);
+            return professores;
+            
+            
+        } catch (Exception e) {
+        throw new RuntimeException(e);
+        }
+               
+
     }
     
     public void setSQL(String sql){

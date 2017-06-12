@@ -5,17 +5,25 @@
  */
 package br.com.ControleDeFrequencia.View;
 
+import br.com.ControleDeFrequencia.DAO.ProfessorDAO;
+import br.com.ControleDeFrequencia.Model.Professor;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Usuario
  */
 public class Janela_Generica extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Janela_Generica
-     */
+    DefaultTableModel linha;
+    List<Professor> professores;
     public Janela_Generica() {
         initComponents();
+        linha = (DefaultTableModel) tbProf.getModel();
     }
 
     /**
@@ -33,10 +41,15 @@ public class Janela_Generica extends javax.swing.JFrame {
         jButtonPesquisar = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tbProf = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jButtonInserir.setText("Inserir");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,18 +83,18 @@ public class Janela_Generica extends javax.swing.JFrame {
 
         jScrollPane2.setForeground(new java.awt.Color(49, 20, 20));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tbProf.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tbProf);
 
         jLabel1.setText("jLabel1");
 
@@ -150,9 +163,37 @@ public class Janela_Generica extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonSairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+      ProfessorDAO profDAO = new ProfessorDAO();
+      
+      professores = profDAO.listar();
+        
+        montarTabelaProf();
+    }//GEN-LAST:event_formWindowOpened
+
+    private void montarTabelaProf() {
+        tbProf.setModel(new DefaultTableModel(
+                new Object[][]{}, new String[]{"Código", "Nome", "Siepe"}));
+        
+        linha = (DefaultTableModel) tbProf.getModel();
+        TableRowSorter<TableModel> sorter;
+        sorter = new TableRowSorter<TableModel>(tbProf.getModel());
+        tbProf.setRowSorter(sorter);
+
+        try {
+            for (Professor professor : professores) {
+                linha.addRow(new Object[]{
+                    professor.getId(),
+                    professor.getNome(),
+                    professor.getSiape()});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro na montagem da tabela");
+        }
+    }
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -193,6 +234,6 @@ public class Janela_Generica extends javax.swing.JFrame {
     private javax.swing.JButton jButtonSair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tbProf;
     // End of variables declaration//GEN-END:variables
 }

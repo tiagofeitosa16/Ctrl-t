@@ -30,6 +30,8 @@ public abstract class Pessoa {
     public int getId() {
         return id;
     }
+    
+    
 
     public String getNome() {
         return nome;
@@ -61,6 +63,10 @@ public abstract class Pessoa {
 
     public void setData_nascimento(Calendar data_nascimento) {
         this.data_nascimento = data_nascimento;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 }
