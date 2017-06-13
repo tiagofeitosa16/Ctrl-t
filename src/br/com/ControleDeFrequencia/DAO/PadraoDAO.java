@@ -18,5 +18,6 @@ public interface PadraoDAO {
     public boolean alterar(Object objeto);
     public boolean deletar(int id);
     public List<Professor> listar();
+    public Professor exibir(int id);
 
 }

@@ -21,6 +21,7 @@ public class Janela_Generica extends javax.swing.JFrame {
 
     DefaultTableModel linha;
     List<Professor> professores;
+
     public Janela_Generica() {
         initComponents();
         linha = (DefaultTableModel) tbProf.getModel();
@@ -158,7 +159,20 @@ public class Janela_Generica extends javax.swing.JFrame {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
-        new JanCad_Professor().setVisible(true);
+        try {
+            if (tbProf.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Selecione uma linha");
+            } else {
+                ProfessorDAO profDAO = new ProfessorDAO();
+                
+                Professor prof = profDAO.exibir((int) tbProf.getValueAt(tbProf.getSelectedRow(), 0));
+                
+                new JanCad_Professor(prof).setVisible(true);
+                
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro ao editar registro");
+        }
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -167,30 +181,28 @@ public class Janela_Generica extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-      ProfessorDAO profDAO = new ProfessorDAO();
-      
-      professores = profDAO.listar();
-        
+        ProfessorDAO profDAO = new ProfessorDAO();
+
+        professores = profDAO.listar();
+
         montarTabelaProf();
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       formWindowOpened(evt);
+        formWindowOpened(evt);
     }//GEN-LAST:event_formWindowActivated
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
-       try {
+        try {
             if (tbProf.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(rootPane, "Selecione uma linha");
             } else {
                 ProfessorDAO profDAO = new ProfessorDAO();
 
                 if (JOptionPane.showConfirmDialog(rootPane, "Deseja excluir o cliente ?") == 0) {
-                    
+
                     profDAO.deletar((int) tbProf.getValueAt(tbProf.getSelectedRow(), 0));
-                    
-                    
-                    
+
                     JOptionPane.showMessageDialog(rootPane, "Registro excluído");
                 }
             }
@@ -202,7 +214,7 @@ public class Janela_Generica extends javax.swing.JFrame {
     private void montarTabelaProf() {
         tbProf.setModel(new DefaultTableModel(
                 new Object[][]{}, new String[]{"Código", "Nome", "Siape"}));
-        
+
         linha = (DefaultTableModel) tbProf.getModel();
         TableRowSorter<TableModel> sorter;
         sorter = new TableRowSorter<TableModel>(tbProf.getModel());
@@ -219,9 +231,7 @@ public class Janela_Generica extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Erro na montagem da tabela");
         }
     }
-    
-    
-    
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

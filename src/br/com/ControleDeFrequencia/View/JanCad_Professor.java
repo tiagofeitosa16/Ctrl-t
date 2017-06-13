@@ -6,10 +6,13 @@
 package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlProfessor;
+import br.com.ControleDeFrequencia.Model.Professor;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -24,6 +27,23 @@ public class JanCad_Professor extends javax.swing.JFrame {
 
     public JanCad_Professor() {
         initComponents();
+    }
+    public JanCad_Professor(Professor prof) {
+        initComponents();
+        jTFCodigo.setText(Integer.toString(prof.getId()));
+        jTFNome.setText(prof.getNome());
+        jCBTitulo.setSelectedIndex(prof.getTitulo());
+        jCBCargo.setSelectedIndex(prof.getVinculo());
+        jTFCPF.setText(prof.getCpf());
+        jTFSiape.setText(prof.getSiape());
+        if ("M".equals(prof.getSexo().getSexo())) {
+            jBGSexo.setSelected(jRBMasculino.getModel(), true);
+        } else if ("F".equals(prof.getSexo().getSexo())) {
+            jBGSexo.setSelected(jRBFeminino.getModel(), true);
+        }
+        SimpleDateFormat f = new SimpleDateFormat("ddMMyyyy");
+        jFTNascimento.setText(f.format(prof.getData_nascimento().getTime()));
+        jFTDataCadastro.setText(f.format(prof.getData_cadastramento().getTime()));
     }
 
     /**
@@ -371,11 +391,21 @@ public class JanCad_Professor extends javax.swing.JFrame {
             this.infoJanela.put("nascimento", this.jFTNascimento.getText());
 
             ControlProfessor cp = new ControlProfessor();
-            if (cp.ControlInserir(infoJanela)) {
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+            if (jTFCodigo.getText().equals("")) {
+                if (cp.ControlInserir(infoJanela)) {
+                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
+                this.infoJanela.put("id", this.jTFCodigo.getText());
+                if (cp.ControlAlterar(infoJanela)) {
+                    JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel alterar o cadastro!");
+                }
             }
+            
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (em negrito)!");

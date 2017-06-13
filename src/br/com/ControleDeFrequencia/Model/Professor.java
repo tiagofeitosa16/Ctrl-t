@@ -122,4 +122,8 @@ public class Professor extends Pessoa {
         return data_cadastramento;
     }
 
+    public void setData_cadastramento(Calendar data_cadastramento) {
+        this.data_cadastramento = data_cadastramento;
+    }
+    
 }
