@@ -97,7 +97,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 345, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(590, 404));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfessoresActionPerformed

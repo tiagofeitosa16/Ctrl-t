@@ -84,7 +84,7 @@ public class ProfessorDAO implements PadraoDAO{
     @Override
     public boolean deletar(int id) {
         try{
-            sql = "delete from professor where id = ?";
+            sql = "delete from professor where id_professor = ?";
             stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
             
             stmt.setInt(1, id);

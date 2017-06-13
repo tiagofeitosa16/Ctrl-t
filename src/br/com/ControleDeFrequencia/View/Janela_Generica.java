@@ -42,10 +42,12 @@ public class Janela_Generica extends javax.swing.JFrame {
         jButtonSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbProf = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -66,6 +68,11 @@ public class Janela_Generica extends javax.swing.JFrame {
         });
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonPesquisar.setText("Pesquisar");
         jButtonPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,8 +103,6 @@ public class Janela_Generica extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tbProf);
 
-        jLabel1.setText("jLabel1");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -113,8 +118,6 @@ public class Janela_Generica extends javax.swing.JFrame {
                         .addComponent(jButtonExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -132,8 +135,7 @@ public class Janela_Generica extends javax.swing.JFrame {
                     .addComponent(jButtonInserir)
                     .addComponent(jButtonAlterar)
                     .addComponent(jButtonExcluir)
-                    .addComponent(jButtonPesquisar)
-                    .addComponent(jLabel1))
+                    .addComponent(jButtonPesquisar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -141,7 +143,8 @@ public class Janela_Generica extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pack();
+        setSize(new java.awt.Dimension(637, 428));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPesquisarActionPerformed
@@ -171,9 +174,34 @@ public class Janela_Generica extends javax.swing.JFrame {
         montarTabelaProf();
     }//GEN-LAST:event_formWindowOpened
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+       formWindowOpened(evt);
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+       try {
+            if (tbProf.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(rootPane, "Selecione uma linha");
+            } else {
+                ProfessorDAO profDAO = new ProfessorDAO();
+
+                if (JOptionPane.showConfirmDialog(rootPane, "Deseja excluir o cliente ?") == 0) {
+                    
+                    profDAO.deletar((int) tbProf.getValueAt(tbProf.getSelectedRow(), 0));
+                    
+                    
+                    
+                    JOptionPane.showMessageDialog(rootPane, "Registro excluído");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Erro na exclusão do registro");
+        }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
+
     private void montarTabelaProf() {
         tbProf.setModel(new DefaultTableModel(
-                new Object[][]{}, new String[]{"Código", "Nome", "Siepe"}));
+                new Object[][]{}, new String[]{"Código", "Nome", "Siape"}));
         
         linha = (DefaultTableModel) tbProf.getModel();
         TableRowSorter<TableModel> sorter;
@@ -232,7 +260,6 @@ public class Janela_Generica extends javax.swing.JFrame {
     private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonPesquisar;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tbProf;
     // End of variables declaration//GEN-END:variables
