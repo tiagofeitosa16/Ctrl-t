@@ -6,10 +6,18 @@
 package br.com.ControleDeFrequencia.DAO;
 
 import br.com.ControleDeFrequencia.Model.Professor;
+import br.com.ControleDeFrequencia.Model.Sexo;
+import br.com.ControleDeFrequencia.View.Janela_Generica;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +27,7 @@ public class ProfessorDAO implements PadraoDAO{
     private Professor professor;
     private String sql;
     private PreparedStatement stmt;
+    private ResultSet rs;
     
     @Override
     public boolean inserir(Object objeto) {
@@ -38,8 +47,11 @@ public class ProfessorDAO implements PadraoDAO{
             stmt.setInt(8, this.professor.getVinculo());
             
             stmt.execute();
-            Conexao.getInstance().fechaConexao(stmt);
             
+            this.AtualizarTabela("");
+            
+            Conexao.getInstance().fechaConexao(stmt);
+           
             return true;
             
         } catch(SQLException e){
@@ -51,7 +63,7 @@ public class ProfessorDAO implements PadraoDAO{
     @Override
     public boolean alterar(Object objeto) {
         try{
-            sql = "update professor set nome = ?, cpf = ?, sexo = ?, data_nascimento = ?, siape = ?, titulo = ?, cargo = ?  where id = ?";
+            sql = "update professor set nome = ?, cpf = ?, sexo = ?, data_nascimento = ?, siape = ?, titulo = ?, vinculo = ?  where id_professor = ?";
             
             this.professor = (Professor) objeto;
             
@@ -64,9 +76,11 @@ public class ProfessorDAO implements PadraoDAO{
             stmt.setString(5, this.professor.getSiape());
             stmt.setInt(6, this.professor.getTitulo());
             stmt.setInt(7, this.professor.getVinculo());
-            stmt.setInt(8, this.professor.getId());
+            stmt.setLong(8, this.professor.getId());
             
             stmt.execute();
+            
+            this.AtualizarTabela("");
             
             Conexao.getInstance().fechaConexao(stmt);
             
@@ -79,13 +93,15 @@ public class ProfessorDAO implements PadraoDAO{
     }
 
     @Override
-    public boolean deletar(int id) {
+    public boolean deletar(long id) {
         try{
-            sql = "delete from professor where id = ?";
+            sql = "delete from professor where id_professor = ?";
             stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
             
-            stmt.setInt(1, id);
+            stmt.setLong(1, id);
             stmt.execute();
+            
+            this.AtualizarTabela("");
             
             Conexao.getInstance().fechaConexao(stmt);
             
@@ -99,10 +115,103 @@ public class ProfessorDAO implements PadraoDAO{
     
     @Override
     public Object selecionar(Object objeto) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try{
+            sql = "Select id_professor, nome, cpf, siape, sexo, data_nascimento, data_cadastro, titulo, vinculo from professor where id_professor = ?";
+            stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
+            
+            stmt.setLong(1, (long) objeto);
+            stmt.execute();
+            
+            this.rs = stmt.getResultSet();
+            this.rs.absolute(1);
+            
+            if(this.professor == null){
+                this.professor = new Professor();
+            }
+            
+            this.professor.setId((long) this.rs.getObject(1));
+            this.professor.setNome((String) this.rs.getObject(2));
+            this.professor.setCpf((String) this.rs.getObject(3));
+            this.professor.setSiape((String) this.rs.getObject(4));
+            
+            if (this.rs.getObject(5).equals("M")){
+                this.professor.setSexo(Sexo.Masculino);
+            } else if(this.rs.getObject(5).equals("F")){
+                this.professor.setSexo(Sexo.Feminino);
+            }   
+            
+            Calendar cal1 = Calendar.getInstance();
+            Date dataNascimento, dataCadastro;
+            
+            dataNascimento = (Date) this.rs.getObject(6);
+            cal1.setTime(dataNascimento);
+            this.professor.setData_nascimento(cal1);
+            
+            Calendar cal2 = Calendar.getInstance();
+            
+            dataCadastro = (Date) this.rs.getObject(7);
+            cal2.setTime(dataCadastro);
+            this.professor.setData_cadastramento(cal2);
+            
+            this.professor.setTitulo((int) this.rs.getObject(8));
+            this.professor.setVinculo((int) this.rs.getObject(9));
+            
+            Conexao.getInstance().fechaConexao(stmt);
+            
+            return this.professor;
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        return "";
     }
     
-    public void setSQL(String sql){
+    public void pesquisar(int opcao, String valor){
+        String sqlTemp = "Select id_professor, nome, cpf, siape from professor ";
+        
+        switch (opcao){
+            case 1:
+                sqlTemp = sqlTemp.concat("where id_professor = '"+valor+"'");
+                break;
+            case 2:
+                sqlTemp = sqlTemp.concat("where nome like '%"+valor+"%'");
+                break;
+            case 3:
+                sqlTemp = sqlTemp.concat("where cpf = '"+valor+"'");
+                break;
+            case 4:
+                sqlTemp = sqlTemp.concat("where siape like '"+valor+"%'");
+                break;
+            default:
+                break;
+        }
+        
+        try{
+            if (!valor.isEmpty()){
+                this.AtualizarTabela(sqlTemp);
+            }else{
+                this.AtualizarTabela("");
+            }
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         
     }
+    
+    public void AtualizarTabela(String sql){
+        try {
+            if (sql == ""){
+                Janela_Generica.tabelaModelo.setSQL("Select id_professor, nome, cpf, siape from Professor");
+            }else{
+                System.out.println(sql);
+                Janela_Generica.tabelaModelo.setSQL(sql);
+            }
+        } catch (IllegalStateException e) {
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, e);
+        } catch (SQLException e) {
+            Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, e);
+        }
+    }    
+    
 }

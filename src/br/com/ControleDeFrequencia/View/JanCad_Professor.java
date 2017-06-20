@@ -6,15 +6,21 @@
 package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlProfessor;
+import br.com.ControleDeFrequencia.Model.Sexo;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.InputMismatchException;
+import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario
  */
-public class JanCad_Professor extends javax.swing.JFrame {
+public class JanCad_Professor extends javax.swing.JDialog implements ADMJanelas {
 
     /**
      * Creates new form JanCad_Professor
@@ -22,6 +28,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
     public HashMap infoJanela = null;
 
     public JanCad_Professor() {
+        this.setModal(true);
         initComponents();
     }
 
@@ -34,6 +41,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jBGSexo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jTFCodigo = new javax.swing.JTextField();
         jTFNome = new javax.swing.JTextField();
@@ -87,9 +95,14 @@ public class JanCad_Professor extends javax.swing.JFrame {
         jBtnSalvar = new javax.swing.JButton();
         jBtnCancelar = new javax.swing.JButton();
 
+        jBGSexo.add(jRBMasculino);
+        jBGSexo.add(jRBFeminino);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Professor");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setFocusableWindowState(true);
+        setLocation(new java.awt.Point(0, 0));
         setMinimumSize(new java.awt.Dimension(450, 320));
         setName("frameJanCad_Professor"); // NOI18N
 
@@ -134,6 +147,12 @@ public class JanCad_Professor extends javax.swing.JFrame {
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jTFSiape.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFSiapeActionPerformed(evt);
+            }
+        });
 
         jTFCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +213,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jRBMasculino)
                     .addComponent(jRBFeminino))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,7 +222,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 .addComponent(jRBMasculino)
                 .addGap(18, 18, 18)
                 .addComponent(jRBFeminino)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -213,6 +232,8 @@ public class JanCad_Professor extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCBCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCBTitulo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -240,9 +261,6 @@ public class JanCad_Professor extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jCBCargo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCBTitulo, javax.swing.GroupLayout.Alignment.LEADING, 0, 392, Short.MAX_VALUE))
                             .addComponent(jLabel9))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -311,7 +329,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 14, Short.MAX_VALUE))))
+                        .addGap(0, 9, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,7 +337,7 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSalvar)
@@ -327,7 +345,8 @@ public class JanCad_Professor extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(422, 407));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTFCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFCPFActionPerformed
@@ -340,28 +359,13 @@ public class JanCad_Professor extends javax.swing.JFrame {
 
     private void jBtnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSalvarActionPerformed
         // TODO add your handling code here:
+        
         if (!(this.jTFNome.getText().isEmpty()) && !(this.jTFCPF.getText().equals("___.___.___-__")) && !(this.jTFSiape.getText().equals("_______")) && (jRBMasculino.isSelected() || jRBFeminino.isSelected()) && !(this.jCBTitulo.getSelectedIndex()==0) && !(this.jCBCargo.getSelectedIndex()==0) && !(this.jFTNascimento.getText().equals("__/__/____"))) {
-            if (!isCPF(this.jTFCPF.getText())) {
-                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! CPF inválido!");
-                return;
-            }
-            try {
-                Integer.parseInt(this.jTFSiape.getText());
-                if(this.jTFSiape.getText().length()!=7){
-                    JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! Siape inválido!");
-                    return;
-                }
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro! Siape inválido!");
-                return;
-            }
-            String cpf = this.jTFCPF.getText();
-            cpf = cpf.replaceAll("[^0-9]","");
-            //if(this.jTFSiape.getText().isNumber())
+            
             this.infoJanela = new HashMap();
 
             this.infoJanela.put("nome", this.jTFNome.getText());
-            this.infoJanela.put("cpf", cpf);
+            this.infoJanela.put("cpf", this.jTFCPF.getText());
             this.infoJanela.put("siape", this.jTFSiape.getText());
 
             if (jRBMasculino.isSelected()) {
@@ -375,11 +379,21 @@ public class JanCad_Professor extends javax.swing.JFrame {
             this.infoJanela.put("nascimento", this.jFTNascimento.getText());
 
             ControlProfessor cp = new ControlProfessor();
-            if (cp.ControlInserir(infoJanela)) {
-                JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
+            if (!(this.jTFCodigo.getText().isEmpty())){
+                this.infoJanela.put("id", this.jTFCodigo.getText());
+                if (cp.ControlAlterar(this.infoJanela)){
+                        JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+                    }else{
+                        JOptionPane.showMessageDialog(null, "Não foi possivel salvar as alterações!");
+                    }
+            }else{
+                if (cp.ControlInserir(infoJanela)) {
+                    JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
+                }
             }
+
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (em negrito)!");
@@ -395,63 +409,41 @@ public class JanCad_Professor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCBTituloActionPerformed
 
-    private boolean isCPF(String CPF) {
-        if (CPF.equals("000.000.000-00") || CPF.equals("111.111.111-11")
-                || CPF.equals("222.222.222-22") || CPF.equals("333.333.333-33")
-                || CPF.equals("444.444.444-44") || CPF.equals("555.555.555-55")
-                || CPF.equals("666.666.666-66") || CPF.equals("777.777.777-77")
-                || CPF.equals("888.888.888-88") || CPF.equals("999.999.999-99")
-                || (CPF.length() != 14)) {
-            return false;
-        }
-        CPF = CPF.replaceAll("[^0-9]","");
-        char dig10, dig11;
-        int sm, i, r, num, peso;
+    private void jTFSiapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFSiapeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFSiapeActionPerformed
 
-// "try" - protege o codigo para eventuais erros de conversao de tipo (int)
+    public void setValoresSelecao(HashMap selecao){
+        jTFCodigo.setText(selecao.get("id").toString());
+        jTFNome.setText((String) selecao.get("nome"));
+        jTFCPF.setText((String) selecao.get("cpf"));
+        jTFSiape.setText((String) selecao.get("siape"));
+        
+        if (selecao.get("sexo") == Sexo.Masculino){
+            jRBMasculino.setSelected(true);   
+        }else if (selecao.get("sexo") == Sexo.Feminino){
+            jRBFeminino.setSelected(true);
+        } 
+        
         try {
-// Calculo do 1o. Digito Verificador
-            sm = 0;
-            peso = 10;
-            for (i = 0; i < 9; i++) {
-// converte o i-esimo caractere do CPF em um numero:
-// por exemplo, transforma o caractere '0' no inteiro 0         
-// (48 eh a posicao de '0' na tabela ASCII)         
-                num = (int) (CPF.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11)) {
-                dig10 = '0';
-            } else {
-                dig10 = (char) (r + 48); // converte no respectivo caractere numerico
-            }
-// Calculo do 2o. Digito Verificador
-            sm = 0;
-            peso = 11;
-            for (i = 0; i < 10; i++) {
-                num = (int) (CPF.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11)) {
-                dig11 = '0';
-            } else {
-                dig11 = (char) (r + 48);
-            }
-
-// Verifica se os digitos calculados conferem com os digitos informados.
-            return (dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10));
-        } catch (InputMismatchException erro) {
-            return false;
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            
+            Calendar nascimento = (Calendar) selecao.get("nascimento");
+            Calendar cadastramento = (Calendar) selecao.get("cadastro");
+            
+            jFTNascimento.setText(sdf.format(nascimento.getTime()));
+            jFTDataCadastro.setText(sdf.format(cadastramento.getTime()));
+            
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        jCBTitulo.setSelectedIndex((int) selecao.get("titulo"));
+        jCBCargo.setSelectedIndex((int) selecao.get("vinculo"));
+       
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup jBGSexo;
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnSalvar;
     private javax.swing.JComboBox jCBCargo;
@@ -477,5 +469,10 @@ public class JanCad_Professor extends javax.swing.JFrame {
     private javax.swing.JTextField jTFNome;
     private javax.swing.JTextField jTFSiape;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void mostrarJanela() {
+        this.setVisible(true);
+    }
 
 }

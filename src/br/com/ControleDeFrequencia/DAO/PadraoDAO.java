@@ -13,7 +13,7 @@ public interface PadraoDAO {
     
     public boolean inserir(Object objeto);
     public boolean alterar(Object objeto);
-    public boolean deletar(int id);
+    public boolean deletar(long id);
     public Object selecionar(Object objeto);
 
 }

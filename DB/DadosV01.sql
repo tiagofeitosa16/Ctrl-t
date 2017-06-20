@@ -13,3 +13,8 @@ create table professor (
 	vinculo int not null,
 	primary key(id_professor)
 );
+
+select * from professor where nome like %Tiago%;
+
+delete from professor;
+drop table professor;

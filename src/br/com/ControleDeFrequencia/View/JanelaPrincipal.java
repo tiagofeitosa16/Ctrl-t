@@ -9,7 +9,7 @@ package br.com.ControleDeFrequencia.View;
  *
  * @author Usuario
  */
-public class JanelaPrincipal extends javax.swing.JFrame {
+public class JanelaPrincipal extends javax.swing.JDialog {
 
     /**
      * Creates new form JanelaPrincipal
@@ -40,8 +40,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuItemMudarUsuario = new javax.swing.JMenuItem();
         jMenuItemEmEspera = new javax.swing.JMenuItem();
         jMenuItemSairSistema = new javax.swing.JMenuItem();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenuCadastros.setText("Cadastros");
 
@@ -97,12 +95,14 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             .addGap(0, 345, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(590, 405));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfessoresActionPerformed
         // TODO add your handling code here:
-        new Janela_Generica().setVisible(true);
+        Janela_Generica janela = new Janela_Generica(1, "Relação de Professores");
+        janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
 
     /**

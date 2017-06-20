@@ -5,18 +5,37 @@
  */
 package br.com.ControleDeFrequencia.View;
 
-import javax.swing.event.DocumentListener;
+import br.com.ControleDeFrequencia.Control.ADMControlPadrao;
+import br.com.ControleDeFrequencia.Control.ControlPadrao;
+import br.com.ControleDeFrequencia.Control.ControlProfessor;
+import br.com.ControleDeFrequencia.Model.TableModelGeneric;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author Usuario
  */
-public class Janela_Generica extends javax.swing.JFrame {
+public class Janela_Generica extends javax.swing.JDialog {
+
+    public ADMJanelas cadProfessor = null;
+    public static TableModelGeneric tabelaModelo = null;
+    private String sql;
+    private int id;
 
     /**
      * Creates new form Janela_Generica
      */
-    public Janela_Generica() {
+    public Janela_Generica(int id, String titulo) {
+        this.id = id;
+        this.setSQl(this.id);
+        this.setTitle(titulo);
+        this.setModal(true);
         initComponents();
     }
 
@@ -33,13 +52,18 @@ public class Janela_Generica extends javax.swing.JFrame {
         jButtonAlterar = new javax.swing.JButton();
         jButtonExcluir = new javax.swing.JButton();
         jButtonSair = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane(jTable2, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        try{
+            this.tabelaModelo = new TableModelGeneric(this.sql);
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        jTable2 = new javax.swing.JTable(this.tabelaModelo);
         jPanel1 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jCBPesquisar = new javax.swing.JComboBox();
         jTFPesquisar = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jButtonInserir.setText("Inserir");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -56,6 +80,11 @@ public class Janela_Generica extends javax.swing.JFrame {
         });
 
         jButtonExcluir.setText("Excluir");
+        jButtonExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonExcluirActionPerformed(evt);
+            }
+        });
 
         jButtonSair.setText("Sair");
         jButtonSair.addActionListener(new java.awt.event.ActionListener() {
@@ -64,24 +93,17 @@ public class Janela_Generica extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane2.setLocation(10, 101);
+        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setSize(701, 352);
         jScrollPane2.setForeground(new java.awt.Color(49, 20, 20));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        jTable2.setModel(this.tabelaModelo);
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Código", "Nome", "CPF", "Siape" }));
+        jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Código", "Nome", "CPF", "Siape" }));
 
         jTFPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +124,7 @@ public class Janela_Generica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTFPesquisar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jCBPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,7 +133,7 @@ public class Janela_Generica extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCBPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -154,17 +176,38 @@ public class Janela_Generica extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(682, 532));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonInserirActionPerformed
         // TODO add your handling code here:
-        new JanCad_Professor().setVisible(true);
+        new ADMJanelaCreator().creator(this.id).mostrarJanela();
     }//GEN-LAST:event_jButtonInserirActionPerformed
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
-        new JanCad_Professor().setVisible(true);
+        int linha = jTable2.getSelectedRow();
+
+        if (linha > -1) { // Verificando de tem item selecionado
+            Object value = jTable2.getValueAt(linha, 0);
+
+            ControlPadrao cp = new ADMControlPadrao().creator(this.id);
+
+            HashMap selecao = cp.ControlSelecionar(value);
+
+            if (selecao != null) {
+                this.cadProfessor = new ADMJanelaCreator().creator(this.id);
+                this.cadProfessor.setValoresSelecao(selecao);
+                this.cadProfessor.mostrarJanela();
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+        }
+
+
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -174,62 +217,60 @@ public class Janela_Generica extends javax.swing.JFrame {
 
     private void jTFPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFPesquisarActionPerformed
         // TODO add your handling code here:
+        if ((jCBPesquisar.getSelectedIndex() != 0)) {
+            new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
+        }
     }//GEN-LAST:event_jTFPesquisarActionPerformed
 
     private void jTFPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPesquisarKeyReleased
-        // TODO add your handling code here:
-        if (!(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE)) {
-            montarMascaraTelefone();
-            buscaCliente();
-        } else if (cfBusca.getText().isEmpty()) {
-            buscaCliente();
-        }
+        // TODO add your handling code here:    
     }//GEN-LAST:event_jTFPesquisarKeyReleased
-   
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
+
+    private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
+        // TODO add your handling code here:
+        String msg = "Deseja realmente excluir?";
+        String titulo = "Confirmação";
+
+        int reply = JOptionPane.showConfirmDialog(null, msg, titulo, JOptionPane.YES_NO_OPTION);
+
+        if (reply == JOptionPane.YES_OPTION) {
+            int linha = jTable2.getSelectedRow();
+
+            if (linha > -1) { // Verificando de tem item selecionado
+                long value = (long) jTable2.getValueAt(linha, 0);
+
+                ControlPadrao cp = new ADMControlPadrao().creator(this.id);
+
+                if (cp.ControlDeletar(value)) {
+                    JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel realizar a exclusão!");
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Janela_Generica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Janela_Generica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Janela_Generica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Janela_Generica.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Janela_Generica().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_jButtonExcluirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
     private javax.swing.JButton jButtonInserir;
     private javax.swing.JButton jButtonSair;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jCBPesquisar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFPesquisar;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
+
+    private void setSQl(int sql) {
+        switch (sql) {
+            case 1:
+                this.sql = "Select id_professor, nome, cpf, siape from Professor";
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Não foi possível carregar a tabela!");
+                dispose();
+        }
+    }
 }

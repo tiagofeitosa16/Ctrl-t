@@ -12,7 +12,7 @@ import java.util.Calendar;
  * @author Usuario
  */
 public abstract class Pessoa {
-    private int id;
+    private long id;
     private String nome;
     private String cpf;
     private Sexo sexo;
@@ -27,8 +27,12 @@ public abstract class Pessoa {
     
     abstract boolean ValidarDataNascimento(Calendar data);
     
-    public int getId() {
+    public long getId() {
         return id;
+    }
+    
+    public void setId(long id){
+        this.id = id;
     }
 
     public String getNome() {

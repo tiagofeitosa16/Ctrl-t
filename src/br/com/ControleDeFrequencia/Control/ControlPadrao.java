@@ -17,8 +17,10 @@ public interface ControlPadrao {
     
     public boolean ControlAlterar(Object objeto);
     
-    public boolean ControlDeletar(int id);
+    public boolean ControlDeletar(long id);
     
-    public HashMap ControlSelecionar(int id);
+    public HashMap ControlSelecionar(Object id);
+    
+    void ControlPesquisar(int opcao, String valor);
     
 }
