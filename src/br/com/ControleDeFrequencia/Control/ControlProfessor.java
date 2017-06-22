@@ -85,7 +85,9 @@ public class ControlProfessor implements ControlPadrao {
         cpf = cpf.replaceAll("[^0-9]","");
         
         this.professor = new Professor();
+        
         this.professor.setId(Long.parseLong(map.get("id").toString()));
+        
         this.professor.setNome(map.get("nome").toString());
         
         if(this.professor.validarSiape(siape)) {
@@ -110,6 +112,7 @@ public class ControlProfessor implements ControlPadrao {
         
         this.professor.setTitulo((int) map.get("titulo"));
         this.professor.setVinculo((int) map.get("vinculo"));
+
         
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("dd/mm/yyyy");
@@ -123,7 +126,7 @@ public class ControlProfessor implements ControlPadrao {
         if (this.professorDao == null){
             this.professorDao = new ProfessorDAO();
         }
-   
+
         if(this.professorDao.alterar(this.professor)){
             return true;
         }
