@@ -12,11 +12,14 @@ package br.com.ControleDeFrequencia.View;
 public class ADMJanelaCreator {
     
     public static final int cadastro_professor = 1;
+    public static final int cadastro_usuario = 2;
     
     public ADMJanelas creator(int janela){
         if (janela == ADMJanelaCreator.cadastro_professor){
             return new JanCad_Professor();
-        }else{
+        }else if(janela == ADMJanelaCreator.cadastro_usuario){
+            return new JanCad_Usuario();
+        }else{   
             throw new IllegalArgumentException("Tipo de janela não encontrada");
         }          
     }

@@ -14,7 +14,19 @@ create table professor (
 	primary key(id_professor)
 );
 
-select * from professor where nome like %Tiago%;
+
+create table usuario(
+	id_usuario bigint auto_increment,
+    nome varchar(60) not null,
+    usuario varchar(15) not null unique,
+    senha varchar(60) not null,
+    id_grupo bigint,
+    primary key(id_usuario)
+);
+
+insert into usuario(nome, usuario, senha, id_grupo) values('Administrador do Sistema', 'ADM', MD5('ADMSystem'), 1);
+
+select * from professor where nome like '%Tia%';
 
 delete from professor;
 drop table professor;

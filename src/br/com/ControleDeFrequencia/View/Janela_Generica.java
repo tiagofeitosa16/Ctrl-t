@@ -268,6 +268,9 @@ public class Janela_Generica extends javax.swing.JDialog {
             case 1:
                 this.sql = "Select id_professor, nome, cpf, siape from Professor";
                 break;
+            case 2:
+                this.sql = "Select id_usuario, usuario, id_grupo from Usuario";
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Não foi possível carregar a tabela!");
                 dispose();

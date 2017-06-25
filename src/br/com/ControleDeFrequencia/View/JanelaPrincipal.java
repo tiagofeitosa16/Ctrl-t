@@ -28,10 +28,10 @@ public class JanelaPrincipal extends javax.swing.JDialog {
     private void initComponents() {
 
         jSeparator2 = new javax.swing.JSeparator();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemProfessores = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuManutencao = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuItemCadastrar = new javax.swing.JMenuItem();
@@ -40,6 +40,10 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuItemMudarUsuario = new javax.swing.JMenuItem();
         jMenuItemEmEspera = new javax.swing.JMenuItem();
         jMenuItemSairSistema = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jMenuCadastros.setText("Cadastros");
 
@@ -51,7 +55,6 @@ public class JanelaPrincipal extends javax.swing.JDialog {
             }
         });
         jMenuCadastros.add(jMenuItemProfessores);
-        jMenuCadastros.add(jSeparator1);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -59,7 +62,13 @@ public class JanelaPrincipal extends javax.swing.JDialog {
 
         jMenuUsuarios.setText("Usuários");
 
+        jMenuItemCadastrar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_U, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItemCadastrar.setText("Cadastrar");
+        jMenuItemCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemCadastrarActionPerformed(evt);
+            }
+        });
         jMenuUsuarios.add(jMenuItemCadastrar);
 
         jMenuItemTrocarSenha.setText("Trocar Senha");
@@ -105,44 +114,17 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JanelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jMenuItemCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarActionPerformed
+        // TODO add your handling code here:
+        Janela_Generica janela = new Janela_Generica(2,"Relação de Usuários");
+        janela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemCadastrarActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new JanelaPrincipal().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastrar;
     private javax.swing.JMenuItem jMenuItemEmEspera;
     private javax.swing.JMenuItem jMenuItemMudarUsuario;
@@ -152,7 +134,6 @@ public class JanelaPrincipal extends javax.swing.JDialog {
     private javax.swing.JMenu jMenuManutencao;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenu jMenuUsuarios;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }

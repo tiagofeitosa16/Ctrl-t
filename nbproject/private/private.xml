@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/View/Login.java</file>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/Model/Usuario.java</file>
             <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/DAO/ProfessorDAO.java</file>
-            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/Model/Pessoa.java</file>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/View/JanCad_Usuario.java</file>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/View/Janela_Generica.java</file>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/Control/ControlUsuario.java</file>
+            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/DAO/UsuarioDAO.java</file>
             <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/View/JanCad_Professor.java</file>
             <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/View/JanelaPrincipal.java</file>
             <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/Control/ControlProfessor.java</file>
-            <file>file:/C:/Workdir/Ctrl-t/src/br/com/ControleDeFrequencia/Model/Professor.java</file>
         </group>
     </open-files>
 </project-private>
