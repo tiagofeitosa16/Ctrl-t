@@ -10,12 +10,17 @@ package br.com.ControleDeFrequencia.Control;
  * @author Usuario
  */
 public class ADMControlPadrao {
+
     public static final int ControlProfessor = 1;
-    
-    public ControlPadrao creator(int control){
-        if (control == ADMControlPadrao.ControlProfessor){
+    public static final int ControlEquipamentos = 3;
+
+    public ControlPadrao creator(int control) {
+        if (control == ADMControlPadrao.ControlProfessor) {
             return new ControlProfessor();
-        }else{
+        } else if (control == ADMControlPadrao.ControlEquipamentos) {
+            return new ControlEquipamento();
+
+        } else {
             throw new IllegalArgumentException("Controle padrão não encontrado");
         }
     }

@@ -380,7 +380,7 @@ public class JanCad_Professor extends javax.swing.JDialog implements ADMJanelas 
 
             ControlProfessor cp = new ControlProfessor();
             if (!(this.jTFCodigo.getText().isEmpty())){
-                this.infoJanela.put("id", this.jTFCodigo.getText());
+                this.infoJanela.put("codigo", this.jTFCodigo.getText());
                 if (cp.ControlAlterar(this.infoJanela)){
                         JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
                     }else{

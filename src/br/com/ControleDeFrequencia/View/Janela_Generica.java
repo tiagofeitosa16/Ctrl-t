@@ -23,20 +23,23 @@ import javax.swing.table.TableModel;
  */
 public class Janela_Generica extends javax.swing.JDialog {
 
-    public ADMJanelas cadProfessor = null;
+    public ADMJanelas cadJanela = null;
     public static TableModelGeneric tabelaModelo = null;
     private String sql;
     private int id;
+    private String[] opcoes;
 
     /**
      * Creates new form Janela_Generica
      */
-    public Janela_Generica(int id, String titulo) {
+    public Janela_Generica(int id, String titulo, String[] opcoes) {
         this.id = id;
         this.setSQl(this.id);
         this.setTitle(titulo);
+        this.opcoes = opcoes;
         this.setModal(true);
         initComponents();
+        
     }
 
     /**
@@ -103,7 +106,7 @@ public class Janela_Generica extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
 
-        jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Código", "Nome", "CPF", "Siape" }));
+        jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(opcoes));
 
         jTFPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,9 +200,9 @@ public class Janela_Generica extends javax.swing.JDialog {
             HashMap selecao = cp.ControlSelecionar(value);
 
             if (selecao != null) {
-                this.cadProfessor = new ADMJanelaCreator().creator(this.id);
-                this.cadProfessor.setValoresSelecao(selecao);
-                this.cadProfessor.mostrarJanela();
+                this.cadJanela = new ADMJanelaCreator().creator(this.id);
+                this.cadJanela.setValoresSelecao(selecao);
+                this.cadJanela.mostrarJanela();
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
             }
@@ -267,6 +270,9 @@ public class Janela_Generica extends javax.swing.JDialog {
         switch (sql) {
             case 1:
                 this.sql = "Select id_professor, nome, cpf, siape from Professor";
+                break;
+            case 3:
+                this.sql = "Select codigo, descrição, numero_tombamento from Equipamento";
                 break;
             default:
                 JOptionPane.showMessageDialog(null, "Não foi possível carregar a tabela!");

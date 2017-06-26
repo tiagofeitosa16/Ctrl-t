@@ -172,14 +172,8 @@
       <SubComponents>
         <Component class="javax.swing.JComboBox" name="jCBPesquisar">
           <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Selecione..."/>
-                <StringItem index="1" value="C&#xf3;digo"/>
-                <StringItem index="2" value="Nome"/>
-                <StringItem index="3" value="CPF"/>
-                <StringItem index="4" value="Siape"/>
-              </StringArray>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="new javax.swing.DefaultComboBoxModel(opcoes)" type="code"/>
             </Property>
           </Properties>
         </Component>

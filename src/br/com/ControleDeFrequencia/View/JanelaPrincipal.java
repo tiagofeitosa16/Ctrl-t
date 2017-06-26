@@ -32,6 +32,7 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemProfessores = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenuManutencao = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuItemCadastrar = new javax.swing.JMenuItem();
@@ -40,6 +41,8 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuItemMudarUsuario = new javax.swing.JMenuItem();
         jMenuItemEmEspera = new javax.swing.JMenuItem();
         jMenuItemSairSistema = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jMenuCadastros.setText("Cadastros");
 
@@ -52,6 +55,15 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         });
         jMenuCadastros.add(jMenuItemProfessores);
         jMenuCadastros.add(jSeparator1);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem1.setText("Equipamentos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItem1);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -101,9 +113,16 @@ public class JanelaPrincipal extends javax.swing.JDialog {
 
     private void jMenuItemProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfessoresActionPerformed
         // TODO add your handling code here:
-        Janela_Generica janela = new Janela_Generica(1, "Relação de Professores");
+        String[]opcoes = {"Selecionar...","Código","Nome","CPF","Siape"};
+        Janela_Generica janela = new Janela_Generica(1, "Relação de Professores", opcoes);
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        String[]opcoes = {"Selecionar...","Código","Descrição","Status"};
+        Janela_Generica janela = new Janela_Generica(3, "Relação de Equipamentos", opcoes);
+        janela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,6 +162,7 @@ public class JanelaPrincipal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastrar;
     private javax.swing.JMenuItem jMenuItemEmEspera;
     private javax.swing.JMenuItem jMenuItemMudarUsuario;
