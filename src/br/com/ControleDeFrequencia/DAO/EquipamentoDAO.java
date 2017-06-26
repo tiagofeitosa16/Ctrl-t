@@ -154,6 +154,13 @@ public class EquipamentoDAO implements PadraoDAO {
                 sqlTemp = sqlTemp.concat("where descrição like '%"+valor+"%'");
                 break;
             case 3:
+                if(valor.toLowerCase().startsWith("d")){
+                    valor="0";
+                } else if (valor.toLowerCase().startsWith("r")){
+                    valor="1";
+                } else if (valor.toLowerCase().startsWith("m")){
+                    valor="2";
+                }
                 sqlTemp = sqlTemp.concat("where estatus = '"+valor+"'");
                 break;
             
