@@ -5,18 +5,25 @@
  */
 package br.com.ControleDeFrequencia.View;
 
+import br.com.ControleDeFrequencia.Control.ControlPadrao;
+import br.com.ControleDeFrequencia.Control.ControlUsuario;
+import br.com.ControleDeFrequencia.DAO.PadraoDAO;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Usuario
  */
 public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
-
+    
+    private ControlPadrao controlUsuario;
+    
     /**
      * Creates new form JanCad_Usuario
      */
     public JanCad_Usuario() {
+        this.setModal(true);
         initComponents();
     }
 
@@ -44,6 +51,7 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
         jPFSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Usuário");
 
         jbtSalvar.setText("Salvar");
         jbtSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +61,11 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
         });
 
         jbtCancelar.setText("Cancelar");
+        jbtCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtCancelarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -102,6 +115,8 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Grupo"));
 
+        jCBGrupo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Administração" }));
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -127,17 +142,23 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbtCancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbtSalvar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jbtCancelar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbtSalvar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jTFUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(8, 8, 8)
+                                        .addComponent(jLabel4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jPFSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(12, 12, 12)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,15 +180,52 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtSalvar)
                     .addComponent(jbtCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(403, 297));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSalvarActionPerformed
         // TODO add your handling code here:
+        if ((!jTFNome.getText().isEmpty()) && (!jTFUsuario.getText().isEmpty()) && (jPFSenha.getPassword() != null)){
+            HashMap infoJanela = new HashMap();
+            infoJanela.put("nome", jTFNome.getText());
+            infoJanela.put("usuario", jTFUsuario.getText());
+            String senha = new String(jPFSenha.getPassword());
+            infoJanela.put("senha", senha);
+            infoJanela.put("id_grupo", jCBGrupo.getSelectedIndex());
+            
+            if(this.controlUsuario == null){
+                this.controlUsuario = new ControlUsuario();
+            }
+            
+            if(!jTFCodigo.getText().isEmpty()){
+                infoJanela.put("id_usuario", jTFCodigo.getText());
+                if (this.controlUsuario.ControlAlterar(infoJanela)){
+                    JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Não foi possível realizar a alteração!");
+            }
+            }else{
+                if (this.controlUsuario.ControlInserir(infoJanela)){
+                    JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+                }else{
+                    JOptionPane.showMessageDialog(null, "Não foi possível realizar o cadastro!");
+                }
+            }
+                      
+            dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios!");
+        }
     }//GEN-LAST:event_jbtSalvarActionPerformed
+
+    private void jbtCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtCancelarActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbtCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -193,6 +251,12 @@ public class JanCad_Usuario extends javax.swing.JDialog implements ADMJanelas{
 
     @Override
     public void setValoresSelecao(HashMap selecao) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.jTFCodigo.setText(selecao.get("id_usuario").toString());
+        this.jTFNome.setText(selecao.get("nome").toString());
+        this.jTFUsuario.setText(selecao.get("usuario").toString());
+        System.out.println(Integer.parseInt(selecao.get("id_grupo").toString()));
+        this.jCBGrupo.setSelectedIndex(Integer.parseInt(selecao.get("id_grupo").toString()));
+        this.jPFSenha.setEnabled(false);
+        
     }
 }

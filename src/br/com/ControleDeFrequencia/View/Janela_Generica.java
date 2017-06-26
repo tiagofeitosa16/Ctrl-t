@@ -23,17 +23,19 @@ import javax.swing.table.TableModel;
  */
 public class Janela_Generica extends javax.swing.JDialog {
 
-    public ADMJanelas cadProfessor = null;
+    public ADMJanelas cadJanela = null;
     public static TableModelGeneric tabelaModelo = null;
     private String sql;
     private int id;
+    private String[] opcoes;
 
     /**
      * Creates new form Janela_Generica
      */
-    public Janela_Generica(int id, String titulo) {
+    public Janela_Generica(int id, String titulo, String[] opcoes) {
         this.id = id;
         this.setSQl(this.id);
+        this.opcoes = opcoes;
         this.setTitle(titulo);
         this.setModal(true);
         initComponents();
@@ -103,7 +105,7 @@ public class Janela_Generica extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
 
-        jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione...", "Código", "Nome", "CPF", "Siape" }));
+        jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(this.opcoes));
 
         jTFPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,17 +199,15 @@ public class Janela_Generica extends javax.swing.JDialog {
             HashMap selecao = cp.ControlSelecionar(value);
 
             if (selecao != null) {
-                this.cadProfessor = new ADMJanelaCreator().creator(this.id);
-                this.cadProfessor.setValoresSelecao(selecao);
-                this.cadProfessor.mostrarJanela();
+                this.cadJanela = new ADMJanelaCreator().creator(this.id);
+                this.cadJanela.setValoresSelecao(selecao);
+                this.cadJanela.mostrarJanela();
             } else {
                 JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
             }
         } else {
             JOptionPane.showMessageDialog(null, "Selecione um item!");
         }
-
-
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

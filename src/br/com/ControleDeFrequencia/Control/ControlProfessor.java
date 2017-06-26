@@ -152,15 +152,15 @@ public class ControlProfessor implements ControlPadrao {
             this.professorDao = new ProfessorDAO();
         }
         
-        if (this.professorDao.selecionar(id) != ""){
-            this.professor = (Professor) this.professorDao.selecionar(id);
+        this.professor = (Professor) this.professorDao.selecionar(id);
+        
+        if (this.professor != null){
+            
             HashMap selecao = new HashMap();
             selecao.put("id", this.professor.getId());
             selecao.put("nome", this.professor.getNome());
             selecao.put("cpf", this.professor.getCpf());
             selecao.put("siape", this.professor.getSiape());
-            
-            System.out.println(this.professor.getSexo());
             
             selecao.put("sexo", this.professor.getSexo());
             selecao.put("nascimento", this.professor.getData_nascimento());

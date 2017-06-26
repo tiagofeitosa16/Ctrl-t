@@ -163,7 +163,7 @@ public class ProfessorDAO implements PadraoDAO{
         } catch(SQLException e){
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
     
     public void pesquisar(int opcao, String valor){

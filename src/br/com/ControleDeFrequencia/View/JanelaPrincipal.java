@@ -9,12 +9,13 @@ package br.com.ControleDeFrequencia.View;
  *
  * @author Usuario
  */
-public class JanelaPrincipal extends javax.swing.JDialog {
+public class JanelaPrincipal extends javax.swing.JFrame {
 
     /**
      * Creates new form JanelaPrincipal
      */
     public JanelaPrincipal() {
+        this.setExtendedState(MAXIMIZED_BOTH);
         initComponents();
     }
 
@@ -44,6 +45,7 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gerenciador de Frequência");
 
         jMenuCadastros.setText("Cadastros");
 
@@ -110,13 +112,15 @@ public class JanelaPrincipal extends javax.swing.JDialog {
 
     private void jMenuItemProfessoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemProfessoresActionPerformed
         // TODO add your handling code here:
-        Janela_Generica janela = new Janela_Generica(1, "Relação de Professores");
+        String[] opcoes = {"Selecione...","Código","Nome","CPF","Siape"};
+        Janela_Generica janela = new Janela_Generica(1, "Relação de Professores", opcoes);
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
 
     private void jMenuItemCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemCadastrarActionPerformed
         // TODO add your handling code here:
-        Janela_Generica janela = new Janela_Generica(2,"Relação de Usuários");
+        String[] opcoes = {"Selecione...","Código","Usuário","Grupo"};
+        Janela_Generica janela = new Janela_Generica(2,"Relação de Usuários", opcoes);
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemCadastrarActionPerformed
 

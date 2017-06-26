@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  *
  * @author Usuario
  */
-public class Login extends javax.swing.JDialog {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Login
@@ -38,6 +38,7 @@ public class Login extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jPFSenha = new javax.swing.JPasswordField();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
 
         jTFUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
