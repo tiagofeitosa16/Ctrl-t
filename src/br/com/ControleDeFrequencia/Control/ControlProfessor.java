@@ -86,8 +86,6 @@ public class ControlProfessor implements ControlPadrao {
         
         this.professor = new Professor();
         
-        this.professor.setId(Long.parseLong(map.get("id").toString()));
-        
         this.professor.setNome(map.get("nome").toString());
         
         if(this.professor.validarSiape(siape)) {

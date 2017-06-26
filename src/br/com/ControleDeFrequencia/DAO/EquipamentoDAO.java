@@ -104,6 +104,7 @@ public class EquipamentoDAO implements PadraoDAO {
     @Override
     public Object selecionar(Object objeto) {
         try {
+            int inativo;
             sql = "Select codigo, descrição, numero_tombamento, data_cadastro, estatus, inativo from equipamento where codigo = ?";
             stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
 
@@ -126,7 +127,11 @@ public class EquipamentoDAO implements PadraoDAO {
             cal1.setTime(dataCadastro);
             this.equipamento.setData_cadastro(cal1);
             this.equipamento.setEstatus((int) this.rs.getObject(5));
-            this.equipamento.setInativo(Integer.parseInt(this.rs.getObject(6).toString()));
+            if(Boolean.parseBoolean(this.rs.getObject(6).toString()))
+                inativo = 1;
+            else
+                inativo = 0;
+            this.equipamento.setInativo(inativo);
 
             Conexao.getInstance().fechaConexao(stmt);
 

@@ -6,6 +6,8 @@
 package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlEquipamento;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
 
@@ -42,6 +44,13 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
         jTFcodigo = new javax.swing.JTextField();
         jTFdescricao = new javax.swing.JTextField();
         jTFnumero_tombamento = new javax.swing.JTextField();
+        try{ 
+            javax.swing.text.MaskFormatter tombamento= new javax.swing.text.MaskFormatter("######");
+            tombamento.setPlaceholderCharacter('_');
+            jTFnumero_tombamento = new javax.swing.JFormattedTextField(tombamento);
+        }
+        catch (Exception e){
+        }
         jTFdata_cadastro = new javax.swing.JTextField();
         jCbstatus = new javax.swing.JComboBox<>();
         jChInativo = new javax.swing.JCheckBox();
@@ -63,8 +72,10 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Descrição");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Número de Tombamento");
 
         jLabel3.setText("Data de Cadastro");
@@ -78,6 +89,11 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
         jTFcodigo.setEditable(false);
 
         jTFdata_cadastro.setEditable(false);
+        jTFdata_cadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTFdata_cadastroActionPerformed(evt);
+            }
+        });
 
         jCbstatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Disponível", "Reservado", "Manutenção" }));
 
@@ -95,30 +111,30 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
                 .addGap(28, 28, 28))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTFcodigo))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTFdescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTFnumero_tombamento)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFdescricao))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFnumero_tombamento))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFcodigo))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
                             .addComponent(jLabel5)
                             .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addGap(16, 16, 16)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jChInativo)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jTFdata_cadastro)
-                                .addComponent(jCbstatus, 0, 91, Short.MAX_VALUE)))))
+                            .addComponent(jTFdata_cadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCbstatus, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -148,7 +164,7 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jChInativo)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBnSalvar)
                     .addComponent(jBnCancelar))
@@ -160,43 +176,50 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnSalvarActionPerformed
-        this.infoJanela = new HashMap();
+        if (!(jTFdescricao.getText().isEmpty()) && !(jTFnumero_tombamento.getText().equals("______"))) {
+            this.infoJanela = new HashMap();
 
-        this.infoJanela.put("descrição", this.jTFdescricao.getText());
-        System.out.println(jTFdescricao.getText());
-        this.infoJanela.put("numero_tombamento",this.jTFnumero_tombamento.getText());
-        this.infoJanela.put("estatus", this.jCbstatus.getSelectedIndex());
-        
-        if (this.jChInativo.isSelected()) {
-            this.infoJanela.put("inativo", 1);
-        }else{
-            this.infoJanela.put("inativo", 0);
-        }
-        
-       // this.infoJanela.put("estatus", this.jTFstatus.getText());
-       // this.infoJanela.put("inativo", this.jTFInativo.getText());
+            this.infoJanela.put("descrição", this.jTFdescricao.getText());
+            System.out.println(jTFdescricao.getText());
+            this.infoJanela.put("numero_tombamento", this.jTFnumero_tombamento.getText());
+            this.infoJanela.put("estatus", this.jCbstatus.getSelectedIndex());
 
-        ControlEquipamento cp = new ControlEquipamento();
-        if (!(this.jTFcodigo.getText().isEmpty())){
+            if (this.jChInativo.isSelected()) {
+                this.infoJanela.put("inativo", 1);
+            } else {
+                this.infoJanela.put("inativo", 0);
+            }
+
+            // this.infoJanela.put("estatus", this.jTFstatus.getText());
+            // this.infoJanela.put("inativo", this.jTFInativo.getText());
+            ControlEquipamento cp = new ControlEquipamento();
+            if (!(this.jTFcodigo.getText().isEmpty())) {
                 this.infoJanela.put("codigo", this.jTFcodigo.getText());
-                if (cp.ControlAlterar(this.infoJanela)){
-                        JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
-                    }else{
-                        JOptionPane.showMessageDialog(null, "Não foi possivel salvar as alterações!");
-                    }
-            }else{
+                if (cp.ControlAlterar(this.infoJanela)) {
+                    JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Não foi possivel salvar as alterações!");
+                }
+            } else {
                 if (cp.ControlInserir(this.infoJanela)) {
                     JOptionPane.showMessageDialog(null, "Cadastro realizado com sucesso!");
                 } else {
                     JOptionPane.showMessageDialog(null, "Não foi possivel realizar o cadastro!");
                 }
             }
-        
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios (em negrito)!");
+        }
     }//GEN-LAST:event_jBnSalvarActionPerformed
 
     private void jBnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBnCancelarActionPerformed
-      dispose();
+        dispose();
     }//GEN-LAST:event_jBnCancelarActionPerformed
+
+    private void jTFdata_cadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFdata_cadastroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFdata_cadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,15 +280,25 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
 
     @Override
     public void setValoresSelecao(HashMap selecao) {
-    jTFcodigo.setText(selecao.get("codigo").toString());
-    jTFdescricao.setText(selecao.get("descrição").toString());
-    jTFnumero_tombamento.setText(selecao.get("numero_tombamento").toString());
-    jCbstatus.setSelectedIndex((int)selecao.get("estatus"));
-    
+        jTFcodigo.setText(selecao.get("codigo").toString());
+        jTFdescricao.setText(selecao.get("descrição").toString());
+        jTFnumero_tombamento.setText(selecao.get("numero_tombamento").toString());
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+            Calendar cadastramento = (Calendar) selecao.get("data_cadastro");
+
+            jTFdata_cadastro.setText(sdf.format(cadastramento.getTime()));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        jCbstatus.setSelectedIndex((int) selecao.get("estatus"));
+
         if (Integer.parseInt(selecao.get("inativo").toString()) == 1) {
             jChInativo.setSelected(true);
-            
+
         }
-    
+
     }
 }
