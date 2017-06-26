@@ -271,6 +271,9 @@ public class Janela_Generica extends javax.swing.JDialog {
             case 1:
                 this.sql = "Select id_professor, nome, cpf, siape from Professor";
                 break;
+            case 2:
+                this.sql = "Select codigo, descricao, graduacao, ano_letivo from Turma";
+                break;
             case 3:
                 this.sql = "Select codigo, descrição, numero_tombamento from Equipamento";
                 break;

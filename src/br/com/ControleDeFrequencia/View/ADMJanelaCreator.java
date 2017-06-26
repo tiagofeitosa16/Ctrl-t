@@ -12,11 +12,14 @@ package br.com.ControleDeFrequencia.View;
 public class ADMJanelaCreator {
     
     public static final int cadastro_professor = 1;
+    public static final int cadastro_turma = 2;
     public static final int cadastro_equipamento = 3;
     
     public ADMJanelas creator(int janela){
         if (janela == ADMJanelaCreator.cadastro_professor){
             return new JanCad_Professor();
+        }else if(janela == ADMJanelaCreator.cadastro_turma){
+            return new JanCad_Turma();
         }else if(janela == ADMJanelaCreator.cadastro_equipamento){
             return new JanCad_Equipamento();
         }

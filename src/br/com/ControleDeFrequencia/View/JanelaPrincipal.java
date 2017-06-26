@@ -32,7 +32,9 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuCadastros = new javax.swing.JMenu();
         jMenuItemProfessores = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemTurma = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItemEquipamentos = new javax.swing.JMenuItem();
         jMenuManutencao = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuItemCadastrar = new javax.swing.JMenuItem();
@@ -56,14 +58,24 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         jMenuCadastros.add(jMenuItemProfessores);
         jMenuCadastros.add(jSeparator1);
 
-        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
-        jMenuItem1.setText("Equipamentos");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemTurma.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemTurma.setText("Turma");
+        jMenuItemTurma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemTurmaActionPerformed(evt);
             }
         });
-        jMenuCadastros.add(jMenuItem1);
+        jMenuCadastros.add(jMenuItemTurma);
+        jMenuCadastros.add(jSeparator3);
+
+        jMenuItemEquipamentos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItemEquipamentos.setText("Equipamentos");
+        jMenuItemEquipamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemEquipamentosActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItemEquipamentos);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -118,11 +130,17 @@ public class JanelaPrincipal extends javax.swing.JDialog {
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemProfessoresActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemEquipamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemEquipamentosActionPerformed
         String[]opcoes = {"Selecionar...","Código","Descrição","Status"};
         Janela_Generica janela = new Janela_Generica(3, "Relação de Equipamentos", opcoes);
         janela.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItemEquipamentosActionPerformed
+
+    private void jMenuItemTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemTurmaActionPerformed
+        String[]opcoes = {"Selecionar...","Código","Descrição","Graduação","Ano Letivo"};
+        Janela_Generica janela = new Janela_Generica(2, "Relação de Turmas", opcoes);
+        janela.setVisible(true);
+    }//GEN-LAST:event_jMenuItemTurmaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,17 +180,19 @@ public class JanelaPrincipal extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItemCadastrar;
     private javax.swing.JMenuItem jMenuItemEmEspera;
+    private javax.swing.JMenuItem jMenuItemEquipamentos;
     private javax.swing.JMenuItem jMenuItemMudarUsuario;
     private javax.swing.JMenuItem jMenuItemProfessores;
     private javax.swing.JMenuItem jMenuItemSairSistema;
     private javax.swing.JMenuItem jMenuItemTrocarSenha;
+    private javax.swing.JMenuItem jMenuItemTurma;
     private javax.swing.JMenu jMenuManutencao;
     private javax.swing.JMenu jMenuSair;
     private javax.swing.JMenu jMenuUsuarios;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }
