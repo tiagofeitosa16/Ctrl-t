@@ -179,7 +179,7 @@ public class Janela_Generica extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(682, 532));
+        setSize(new java.awt.Dimension(682, 540));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

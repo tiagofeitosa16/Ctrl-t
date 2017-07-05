@@ -104,7 +104,7 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(216, Short.MAX_VALUE)
+                .addContainerGap(144, Short.MAX_VALUE)
                 .addComponent(jBnSalvar)
                 .addGap(18, 18, 18)
                 .addComponent(jBnCancelar)
@@ -171,7 +171,7 @@ public class JanCad_Equipamento extends javax.swing.JDialog implements ADMJanela
                 .addContainerGap())
         );
 
-        setSize(new java.awt.Dimension(416, 338));
+        setSize(new java.awt.Dimension(344, 338));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
