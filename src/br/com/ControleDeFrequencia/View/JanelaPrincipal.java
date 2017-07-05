@@ -35,6 +35,8 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuItemProfessores = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jMenuItemEquipamentos = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuManutencao = new javax.swing.JMenu();
         jMenuUsuarios = new javax.swing.JMenu();
         jMenuItemCadastrar = new javax.swing.JMenuItem();
@@ -71,6 +73,16 @@ public class JanelaPrincipal extends javax.swing.JFrame {
             }
         });
         jMenuCadastros.add(jMenuItemEquipamentos);
+        jMenuCadastros.add(jSeparator5);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Turmas");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenuCadastros.add(jMenuItem2);
 
         jMenuBar1.add(jMenuCadastros);
 
@@ -105,6 +117,11 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         jMenuSair.add(jSeparator4);
 
         jMenuItemSairSistema.setText("Sair do Sistema");
+        jMenuItemSairSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemSairSistemaActionPerformed(evt);
+            }
+        });
         jMenuSair.add(jMenuItemSairSistema);
 
         jMenuBar1.add(jMenuSair);
@@ -147,11 +164,24 @@ public class JanelaPrincipal extends javax.swing.JFrame {
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItemEquipamentosActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        String[]opcoes = {"Selecionar...","Código","Descrição","Graduação","Ano Letivo"};
+        Janela_Generica janela = new Janela_Generica(4, "Relação de Turmas", opcoes);
+        janela.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItemSairSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSairSistemaActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItemSairSistemaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuCadastros;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemCadastrar;
     private javax.swing.JMenuItem jMenuItemEmEspera;
     private javax.swing.JMenuItem jMenuItemEquipamentos;
@@ -166,5 +196,6 @@ public class JanelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     // End of variables declaration//GEN-END:variables
 }

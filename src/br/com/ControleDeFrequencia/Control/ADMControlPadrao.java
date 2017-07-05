@@ -14,6 +14,7 @@ public class ADMControlPadrao {
     public static final int ControlProfessor = 1;
     public static final int ControlUsuario = 2;
     public static final int ControlEquipamentos = 3;
+    public static final int ControlTurma = 4;
     
     public ControlPadrao creator(int control){
         if (control == ADMControlPadrao.ControlProfessor){
@@ -22,6 +23,8 @@ public class ADMControlPadrao {
             return new ControlUsuario();
         } else if (control == ADMControlPadrao.ControlEquipamentos) {
             return new ControlEquipamento();
+        } else if (control == ADMControlPadrao.ControlTurma) {
+            return new ControlTurma();
         } else {
             throw new IllegalArgumentException("Controle padrão não encontrado");
         }

@@ -107,7 +107,12 @@ public class ControlUsuario implements ControlPadrao{
 
     @Override
     public void ControlPesquisar(int opcao, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(this.usuarioDao == null){
+            this.usuarioDao = new UsuarioDAO();
+        }
+        
+        this.usuarioDao.pesquisar(opcao, valor);
+        
     }
     
     public boolean ControlValidarUsuario(String usuario, String senha){

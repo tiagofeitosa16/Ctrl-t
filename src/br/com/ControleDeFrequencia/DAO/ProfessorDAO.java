@@ -67,18 +67,18 @@ public class ProfessorDAO implements PadraoDAO{
             
             this.professor = (Professor) objeto;
             
-            stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
+            this.stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
             
-            stmt.setString(1, this.professor.getNome());
-            stmt.setString(2, this.professor.getCpf());
-            stmt.setString(3, this.professor.getSexo().getSexo());
-            stmt.setDate(4, new java.sql.Date(this.professor.getData_nascimento().getTimeInMillis()));
-            stmt.setString(5, this.professor.getSiape());
-            stmt.setInt(6, this.professor.getTitulo());
-            stmt.setInt(7, this.professor.getVinculo());
-            stmt.setLong(8, this.professor.getId());
+            this.stmt.setString(1, this.professor.getNome());
+            this.stmt.setString(2, this.professor.getCpf());
+            this.stmt.setString(3, this.professor.getSexo().getSexo());
+            this.stmt.setDate(4, new java.sql.Date(this.professor.getData_nascimento().getTimeInMillis()));
+            this.stmt.setString(5, this.professor.getSiape());
+            this.stmt.setInt(6, this.professor.getTitulo());
+            this.stmt.setInt(7, this.professor.getVinculo());
+            this.stmt.setLong(8, this.professor.getId());
             
-            stmt.execute();
+            this.stmt.execute();
             
             this.AtualizarTabela("");
             

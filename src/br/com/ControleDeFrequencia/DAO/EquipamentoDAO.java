@@ -185,7 +185,7 @@ public class EquipamentoDAO implements PadraoDAO {
     public void AtualizarTabela(String sql){
         try {
             if (sql == ""){
-                Janela_Generica.tabelaModelo.setSQL("Select codigo, descricao, numero_tombamento from equipamento");
+                Janela_Generica.tabelaModelo.setSQL("Select codigo, descricao, estatus from equipamento");
             }else{
                 System.out.println(sql);
                 Janela_Generica.tabelaModelo.setSQL(sql);

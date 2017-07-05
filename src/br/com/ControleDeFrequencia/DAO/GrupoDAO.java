@@ -35,5 +35,10 @@ public class GrupoDAO implements PadraoDAO{
     public void AtualizarTabela(String sql) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public void pesquisar(int opcao, String valor) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

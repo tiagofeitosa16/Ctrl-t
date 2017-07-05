@@ -136,6 +136,37 @@ public class UsuarioDAO implements PadraoDAO{
         
     }
     
+    public void pesquisar(int opcao, String valor){
+        String sqlTemp = "Select id_usuario, usuario, id_grupo from Usuario ";
+
+        
+        switch (opcao){
+            case 1:
+                sqlTemp = sqlTemp.concat("where id_usuario = '"+valor+"'");
+                break;
+            case 2:
+                sqlTemp = sqlTemp.concat("where usuario like '"+valor+"%'");
+                break;
+            case 3:
+                sqlTemp = sqlTemp.concat("where id_grupo = '"+valor+"'");
+                break;
+            default:
+                break;
+        }
+        
+        try{
+            if (!valor.isEmpty()){
+                this.AtualizarTabela(sqlTemp);
+            }else{
+                this.AtualizarTabela("");
+            }
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        
+    }
+    
     public boolean ValidarUsuario(String usuario, String senha){
         try{
             this.sql = "select count(*) as total from usuario where usuario = ? and senha = MD5(?)";

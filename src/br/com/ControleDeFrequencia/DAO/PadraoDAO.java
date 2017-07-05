@@ -15,6 +15,7 @@ public interface PadraoDAO {
     public boolean alterar(Object objeto);
     public boolean deletar(long id);
     public Object selecionar(Object objeto);
+    public void pesquisar(int opcao, String valor);
     public void AtualizarTabela(String sql);
 
 }
