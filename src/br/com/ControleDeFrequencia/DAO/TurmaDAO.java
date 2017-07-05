@@ -104,6 +104,7 @@ public class TurmaDAO implements PadraoDAO{
             sql = "SELECT codigo, descricao,  case graduacao\n" +
 "								when 1 then 'Superior'\n" +
 "								when 2 then 'Técnico'\n" +
+"								when 3 then 'Subsequente'\n" +
 "							end as graduacao, \n" +
 "                              ano_letivo FROM Turma where codigo = ?";
             stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
@@ -123,8 +124,10 @@ public class TurmaDAO implements PadraoDAO{
             if ( this.rs.getObject(3).toString().equals("Superior") ){
                 this.turma.setGraduacao(1);
             }
-            else{
+            else if ( this.rs.getObject(3).toString().equals("Técnico") ){
                 this.turma.setGraduacao(2);
+            } else {
+                this.turma.setGraduacao(3);
             }
             this.turma.setAno_letivo(this.rs.getObject(4).toString());
             
@@ -142,6 +145,7 @@ public class TurmaDAO implements PadraoDAO{
         String sqlTemp = "SELECT codigo, descricao,  case graduacao\n" +
 "								when 1 then 'Superior'\n" +
 "								when 2 then 'Técnico'\n" +
+"								when 3 then 'Subsequente'\n" +
 "							end as graduacao, \n" +
 "                              ano_letivo FROM Turma ";
         
@@ -153,10 +157,15 @@ public class TurmaDAO implements PadraoDAO{
                 sqlTemp = sqlTemp.concat("where descricao like '%"+valor+"%'");
                 break;
             case 3:
-                if (valor.toLowerCase().startsWith("s")){
+                if ((valor.toLowerCase().startsWith("s") || valor.toLowerCase().startsWith("su")) && (valor.length() == 1 || valor.length() == 2)){
+                    sqlTemp = sqlTemp.concat("where graduacao = '1' or graduacao = '3'");
+                    break;
+                } else if (valor.toLowerCase().startsWith("sup")){
                     valor="1";
                 } else if (valor.toLowerCase().startsWith("t")){
                     valor="2";
+                } else if (valor.toLowerCase().startsWith("sub")){
+                    valor="3";
                 }
                 sqlTemp = sqlTemp.concat("where graduacao = '"+valor+"'");
                 break;
@@ -186,6 +195,7 @@ public class TurmaDAO implements PadraoDAO{
                 Janela_Generica.tabelaModelo.setSQL("SELECT codigo, descricao,  case graduacao\n" +
 "								when 1 then 'Superior'\n" +
 "								when 2 then 'Técnico'\n" +
+"								when 3 then 'Subsequente'\n" +
 "							end as graduacao, \n" +
 "                              ano_letivo FROM Turma");
             }else{

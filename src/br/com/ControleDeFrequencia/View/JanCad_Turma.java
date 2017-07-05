@@ -76,7 +76,7 @@ public class JanCad_Turma  extends javax.swing.JDialog implements ADMJanelas{
 
         jLabel2.setText("Graduação");
 
-        jCBGraduacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Superior", "Técnico" }));
+        jCBGraduacao.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Superior", "Técnico", "Subsequente" }));
         jCBGraduacao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCBGraduacaoActionPerformed(evt);
@@ -163,7 +163,7 @@ public class JanCad_Turma  extends javax.swing.JDialog implements ADMJanelas{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBCancelar)
                     .addComponent(jBSalvar))
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(220, Short.MAX_VALUE))
         );
 
         jBCancelar.getAccessibleContext().setAccessibleDescription("");
@@ -213,8 +213,10 @@ public class JanCad_Turma  extends javax.swing.JDialog implements ADMJanelas{
             if ( this.jCBGraduacao.getSelectedItem().toString().equals("Superior") ){
                 this.infoJanela.put("graduacao", "" + 1);
             }
-            else{
+            else if ( this.jCBGraduacao.getSelectedItem().toString().equals("Técnico") ){
                 this.infoJanela.put("graduacao", "" + 2);
+            } else {
+                this.infoJanela.put("graduacao", "" + 3);
             }
 
             ControlTurma ct = new ControlTurma();
@@ -275,9 +277,12 @@ public class JanCad_Turma  extends javax.swing.JDialog implements ADMJanelas{
             System.err.println("SUPERIOR");
             jCBGraduacao.setSelectedItem("Superior");
         }
-        else {
+        else if (Integer.parseInt(selecao.get("graduacao").toString()) == 2){
             System.err.println("TEC");
             jCBGraduacao.setSelectedItem("Técnico");
+        } else {
+            System.err.println("SUB");
+            jCBGraduacao.setSelectedItem("Subsequente");
         }
         jTdescricao.setText(selecao.get("descricao").toString());
         jTFAno_letivo.setText(selecao.get("ano_letivo").toString());

@@ -132,7 +132,7 @@
                       <Component id="jBCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jBSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="225" max="32767" attributes="0"/>
+                  <EmptySpace pref="220" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,9 +158,10 @@
         <Component class="javax.swing.JComboBox" name="jCBGraduacao">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="2">
+              <StringArray count="3">
                 <StringItem index="0" value="Superior"/>
                 <StringItem index="1" value="T&#xe9;cnico"/>
+                <StringItem index="2" value="Subsequente"/>
               </StringArray>
             </Property>
           </Properties>
