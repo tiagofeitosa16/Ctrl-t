@@ -24,9 +24,25 @@ create table usuario(
     primary key(id_usuario)
 );
 
+create table Turma(
+    codigo bigint not null unique auto_increment,
+    descricao varchar(255),
+    graduacao int not null, -- 1 = Superior, 2 - Técnico
+    ano_letivo varchar(20) not null,
+    primary key (codigo)
+);
+
+create table equipamento(
+    codigo bigint not null unique auto_increment,
+    descricao varchar(255),
+    numero_tombamento int not null,
+    data_cadastro date not null, 
+    estatus int not null, 
+    inativo int not null,
+    primary key(codigo)
+);
+
+
 insert into usuario(nome, usuario, senha, id_grupo) values('Administrador do Sistema', 'ADM', MD5('ADMSystem'), 1);
 
-select * from professor where nome like '%Tia%';
 
-delete from professor;
-drop table professor;
