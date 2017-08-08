@@ -15,5 +15,4 @@ public interface ADMJanelas {
 
     void mostrarJanela();
     void setValoresSelecao(HashMap selecao);
-    
 }

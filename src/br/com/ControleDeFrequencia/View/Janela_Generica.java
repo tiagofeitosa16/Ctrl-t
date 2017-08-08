@@ -9,6 +9,7 @@ import br.com.ControleDeFrequencia.Control.ADMControlPadrao;
 import br.com.ControleDeFrequencia.Control.ControlPadrao;
 import br.com.ControleDeFrequencia.Control.ControlProfessor;
 import br.com.ControleDeFrequencia.Model.TableModelGeneric;
+import java.awt.Point;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -101,6 +102,11 @@ public class Janela_Generica extends javax.swing.JDialog {
         jScrollPane2.setForeground(new java.awt.Color(49, 20, 20));
 
         jTable2.setModel(this.tabelaModelo);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
@@ -189,25 +195,7 @@ public class Janela_Generica extends javax.swing.JDialog {
 
     private void jButtonAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlterarActionPerformed
         // TODO add your handling code here:
-        int linha = jTable2.getSelectedRow();
-
-        if (linha > -1) { // Verificando de tem item selecionado
-            Object value = jTable2.getValueAt(linha, 0);
-
-            ControlPadrao cp = new ADMControlPadrao().creator(this.id);
-
-            HashMap selecao = cp.ControlSelecionar(value);
-
-            if (selecao != null) {
-                this.cadJanela = new ADMJanelaCreator().creator(this.id);
-                this.cadJanela.setValoresSelecao(selecao);
-                this.cadJanela.mostrarJanela();
-            } else {
-                JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
-            }
-        } else {
-            JOptionPane.showMessageDialog(null, "Selecione um item!");
-        }
+        acaoAlterar();
     }//GEN-LAST:event_jButtonAlterarActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed
@@ -251,6 +239,13 @@ public class Janela_Generica extends javax.swing.JDialog {
 
     }//GEN-LAST:event_jButtonExcluirActionPerformed
 
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2){
+            acaoAlterar();
+        }          
+    }//GEN-LAST:event_jTable2MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
@@ -282,4 +277,28 @@ public class Janela_Generica extends javax.swing.JDialog {
                 dispose();
         }
     }
+    
+    private void acaoAlterar(){
+        int linha = jTable2.getSelectedRow();
+
+        if (linha > -1) { // Verificando de tem item selecionado
+            Object value = jTable2.getValueAt(linha, 0);
+
+            ControlPadrao cp = new ADMControlPadrao().creator(this.id);
+
+            HashMap selecao = cp.ControlSelecionar(value);
+
+            if (selecao != null) {
+                this.cadJanela = new ADMJanelaCreator().creator(this.id);
+                this.cadJanela.setValoresSelecao(selecao);
+                this.cadJanela.mostrarJanela();
+            } else {
+                JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Selecione um item!");
+        }
+    }
+    
 }
+
