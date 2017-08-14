@@ -6,6 +6,7 @@
 package br.com.ControleDeFrequencia.Control;
 
 import br.com.ControleDeFrequencia.DAO.DisciplinaDAO;
+import br.com.ControleDeFrequencia.DAO.ProfessorDAO;
 import br.com.ControleDeFrequencia.Model.Disciplina;
 import br.com.ControleDeFrequencia.Model.Professor;
 import java.text.ParseException;
@@ -133,6 +134,22 @@ public class ControlDisciplina implements ControlPadrao {
     @Override
     public void ControlPesquisar(int opcao, String valor) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<String[]> pegarListaDeDisciplina() {
+        ArrayList<String[]> lista = new ArrayList<>();
+        
+        DisciplinaDAO dDao = new DisciplinaDAO();
+       
+        for (Disciplina disciplina:  dDao.pegarListaDeDisciplinas()){
+            String[] p = new String[2];
+            p[0] = String.valueOf(disciplina.getId());
+            p[1] = disciplina.getDisciplina();
+            lista.add(p);
+        }
+         
+        return lista;
+
     }
    
 }

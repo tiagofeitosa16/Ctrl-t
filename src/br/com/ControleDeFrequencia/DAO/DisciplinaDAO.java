@@ -174,5 +174,31 @@ public class DisciplinaDAO implements PadraoDAO{
             Logger.getLogger(ProfessorDAO.class.getName()).log(Level.SEVERE, null, e);
         }
     }
+
+    public Iterable<Disciplina> pegarListaDeDisciplinas() {
+        ArrayList<Disciplina> Disciplinas = new ArrayList<>();
+        try{
+            this.sql = "Select codigo, disciplina from Disciplina order by codigo";
+            this.stmt = Conexao.getInstance().getConexao().prepareStatement(this.sql);
+            this.rs = this.stmt.executeQuery();
+            
+            while (this.rs.next()){
+               if (this.disciplina == null){
+                    this.disciplina = new Disciplina();
+               }              
+               this.disciplina.setId((Long) this.rs.getLong(1));
+               this.disciplina.setDisciplina(this.rs.getString(2));
+               Disciplinas.add(this.disciplina);
+               this.disciplina = null;
+            }
+            
+            Conexao.getInstance().fechaConexao(stmt, rs);
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return Disciplinas;
+    }
     
 }
