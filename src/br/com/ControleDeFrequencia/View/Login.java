@@ -167,6 +167,7 @@ public class Login extends javax.swing.JFrame {
                 this.dispose();
             }else{
                 JOptionPane.showMessageDialog(null, "Usuário ou senha inválidos!");
+                jPFSenha.grabFocus();
             }
         }else{
             JOptionPane.showMessageDialog(null, "Prencha o nome de usuário!");

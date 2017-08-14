@@ -56,6 +56,8 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
         jRBSuperior = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jCBSerie = new javax.swing.JComboBox();
+        jCBCurso = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
 
         nivelGroup.add(jRBMedio);
         nivelGroup.add(jRBSuperior);
@@ -179,6 +181,18 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
         jCBSerie.setEnabled(false);
         getContentPane().add(jCBSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, 120, -1));
 
+        jCBCurso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione...", "Sistemas de Informação", "Zootecnica" }));
+        jCBCurso.setEnabled(false);
+        jCBCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBCursoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCBCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 130, -1));
+
+        jLabel6.setText("Curso");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, -1));
+
         setSize(new java.awt.Dimension(425, 341));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -204,6 +218,7 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
                 infoJanela.put("Serie", String.valueOf(jCBSerie.getSelectedIndex()));
             }else if (jRBSuperior.isSelected()){
                 infoJanela.put("Semestre", String.valueOf(jCBSemestre.getSelectedIndex()));
+                infoJanela.put("Curso", String.valueOf(jCBCurso.getSelectedItem()));
             }
             
             infoJanela.put("Horario", jTFCargaHoraria.getText());
@@ -240,6 +255,7 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
     private void jRBSuperiorStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jRBSuperiorStateChanged
         // TODO add your handling code here:
         jCBSemestre.setEnabled(jRBSuperior.isSelected());
+        jCBCurso.setEnabled(jRBSuperior.isSelected());
     }//GEN-LAST:event_jRBSuperiorStateChanged
 
     private void jCBProfessorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBProfessorItemStateChanged
@@ -250,6 +266,10 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
             }
         }
     }//GEN-LAST:event_jCBProfessorItemStateChanged
+
+    private void jCBCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBCursoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCBCursoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -290,6 +310,7 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCancelar;
     private javax.swing.JButton jBtnSalvar;
+    private javax.swing.JComboBox<String> jCBCurso;
     private javax.swing.JComboBox jCBProfessor;
     private javax.swing.JComboBox jCBSemestre;
     private javax.swing.JComboBox jCBSerie;
@@ -298,6 +319,7 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton jRBMedio;
@@ -325,6 +347,8 @@ public class JanCad_Disciplina extends javax.swing.JDialog implements ADMJanelas
         jCBSemestre.setSelectedIndex((int) selecao.get("Semestre"));
         jCBSemestre.setEnabled(jCBSemestre.getSelectedIndex() > 0);
         jRBSuperior.setSelected(jCBSemestre.getSelectedIndex() > 0);
+        jCBCurso.setEnabled(jCBSemestre.getSelectedIndex() > 0);
+        jCBCurso.setSelectedItem(selecao.get("Curso").toString());
         
         jCBSerie.setSelectedIndex((int) selecao.get("Serie"));
         jCBSerie.setEnabled(jCBSerie.getSelectedIndex() > 0);
