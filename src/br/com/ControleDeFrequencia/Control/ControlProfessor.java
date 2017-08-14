@@ -12,6 +12,7 @@ import br.com.ControleDeFrequencia.View.JanCad_Professor;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import javax.swing.JOptionPane;
@@ -184,6 +185,22 @@ public class ControlProfessor implements ControlPadrao {
         
         this.professorDao.pesquisar(opcao, valor);
 
+    }
+    
+    public ArrayList<String[]> pegarListaDeProfessores(){
+        
+        ArrayList<String[]> lista = new ArrayList<>();
+        
+        ProfessorDAO dDao = new ProfessorDAO();
+       
+        for (Professor professor:  dDao.pegarListaDeProfessores()){
+            String[] p = new String[2];
+            p[0] = String.valueOf(professor.getId());
+            p[1] = professor.getNome();
+            lista.add(p);
+        }
+         
+        return lista;
     }
     
 }

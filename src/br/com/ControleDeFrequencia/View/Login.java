@@ -6,6 +6,7 @@
 package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlUsuario;
+import com.sun.glass.events.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,8 +41,21 @@ public class Login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LOGIN");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jTFUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jTFUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTFUsuarioKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Usuário");
@@ -53,6 +67,11 @@ public class Login extends javax.swing.JFrame {
         jbtConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtConfirmarActionPerformed(evt);
+            }
+        });
+        jbtConfirmar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jbtConfirmarKeyPressed(evt);
             }
         });
 
@@ -68,6 +87,16 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Gerenciador de Frequência");
 
         jPFSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPFSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPFSenhaActionPerformed(evt);
+            }
+        });
+        jPFSenha.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPFSenhaKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -126,7 +155,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtConfirmarActionPerformed
-        // TODO add your handling code here:
+        
         if(!(jTFUsuario.getText().isEmpty())){
             ControlUsuario controlUsuario = new ControlUsuario();
             
@@ -148,6 +177,36 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jbtCancelarActionPerformed
+
+    private void jbtConfirmarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jbtConfirmarKeyPressed
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER)) {
+             jbtConfirmarActionPerformed(null);
+        }
+    }//GEN-LAST:event_jbtConfirmarKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowActivated
+
+    private void jTFUsuarioKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFUsuarioKeyPressed
+       if ((evt.getKeyCode() == KeyEvent.VK_ENTER)) {
+       jPFSenha.grabFocus();
+       }
+    }//GEN-LAST:event_jTFUsuarioKeyPressed
+
+    private void jPFSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPFSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPFSenhaActionPerformed
+
+    private void jPFSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPFSenhaKeyPressed
+        if ((evt.getKeyCode() == KeyEvent.VK_ENTER)) {
+       jbtConfirmar.grabFocus();
+       }
+    }//GEN-LAST:event_jPFSenhaKeyPressed
 
     /**
      * @param args the command line arguments

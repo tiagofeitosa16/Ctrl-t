@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -197,6 +198,33 @@ public class ProfessorDAO implements PadraoDAO{
             e.printStackTrace();
         }
         
+    }
+    
+    public ArrayList<Professor> pegarListaDeProfessores(){
+        ArrayList<Professor> Professores = new ArrayList<>();
+        try{
+            this.sql = "Select id_professor, nome from Professor order by id_professor";
+            this.stmt = Conexao.getInstance().getConexao().prepareStatement(this.sql);
+            this.rs = this.stmt.executeQuery();
+            
+            while (this.rs.next()){
+               if (this.professor == null){
+                    this.professor = new Professor();
+               }              
+               this.professor.setId((Long) this.rs.getLong(1));
+               this.professor.setNome(this.rs.getString(2));
+               Professores.add(this.professor);
+               this.professor = null;
+            }
+            
+            Conexao.getInstance().fechaConexao(stmt, rs);
+            
+        } catch(SQLException e){
+            e.printStackTrace();
+        }
+        
+        return Professores;
+    
     }
     
     public void AtualizarTabela(String sql){

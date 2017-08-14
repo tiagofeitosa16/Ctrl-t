@@ -24,9 +24,6 @@ public class ControlEquipamento implements ControlPadrao{
         
         
         HashMap map = (HashMap) objeto;
-        
-        
-        
         this.equipamento.setDescricao((String) map.get("descrição").toString());
         this.equipamento.setNumero_tombamento(Integer.parseInt(map.get("numero_tombamento").toString()));
         this.equipamento.setEstatus((int) map.get("estatus"));
@@ -44,25 +41,25 @@ public class ControlEquipamento implements ControlPadrao{
 
     @Override
     public boolean ControlAlterar(Object objeto) {
-    HashMap map = (HashMap) objeto;
+        HashMap map = (HashMap) objeto;
 
 
-    this.equipamento = new Equipamento();
-    
-    this.equipamento.setId(Long.parseLong(map.get("codigo").toString()));
-    this.equipamento.setDescricao(map.get("descrição").toString());
-    this.equipamento.setNumero_tombamento(Integer.parseInt(map.get("numero_tombamento").toString()));
-    this.equipamento.setEstatus((int)map.get("estatus"));
-    this.equipamento.setInativo((int)map.get("inativo"));
-    
-    if (this.equipamentoDao == null){
-            this.equipamentoDao = new EquipamentoDAO();
-        }
+        this.equipamento = new Equipamento();
 
-        if(this.equipamentoDao.alterar(this.equipamento)){
-            return true;
-        }
-        return false;
+        this.equipamento.setId(Long.parseLong(map.get("codigo").toString()));
+        this.equipamento.setDescricao(map.get("descrição").toString());
+        this.equipamento.setNumero_tombamento(Integer.parseInt(map.get("numero_tombamento").toString()));
+        this.equipamento.setEstatus((int)map.get("estatus"));
+        this.equipamento.setInativo((int)map.get("inativo"));
+
+        if (this.equipamentoDao == null){
+                this.equipamentoDao = new EquipamentoDAO();
+            }
+
+            if(this.equipamentoDao.alterar(this.equipamento)){
+                return true;
+            }
+            return false;
     
     }
 

@@ -10,6 +10,7 @@ import br.com.ControleDeFrequencia.Control.ControlPadrao;
 import br.com.ControleDeFrequencia.Control.ControlProfessor;
 import br.com.ControleDeFrequencia.Model.TableModelGeneric;
 import java.awt.Point;
+import com.sun.glass.events.KeyEvent;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -67,6 +68,14 @@ public class Janela_Generica extends javax.swing.JDialog {
         jTFPesquisar = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jButtonInserir.setText("Inserir");
         jButtonInserir.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +121,11 @@ public class Janela_Generica extends javax.swing.JDialog {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pesquisar por:"));
 
         jCBPesquisar.setModel(new javax.swing.DefaultComboBoxModel(this.opcoes));
+        jCBPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCBPesquisarActionPerformed(evt);
+            }
+        });
 
         jTFPesquisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,7 +225,15 @@ public class Janela_Generica extends javax.swing.JDialog {
     }//GEN-LAST:event_jTFPesquisarActionPerformed
 
     private void jTFPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFPesquisarKeyReleased
-        // TODO add your handling code here:    
+        if (!(evt.getKeyCode() == KeyEvent.VK_BACKSPACE)) {
+            if ((jCBPesquisar.getSelectedIndex() != 0)) {
+                new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
+            }
+        }else if((evt.getKeyCode() == KeyEvent.VK_BACKSPACE)){
+            if ((jCBPesquisar.getSelectedIndex() != 0)) {
+                new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
+            }
+        }
     }//GEN-LAST:event_jTFPesquisarKeyReleased
 
     private void jButtonExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonExcluirActionPerformed
@@ -246,6 +268,30 @@ public class Janela_Generica extends javax.swing.JDialog {
         }          
     }//GEN-LAST:event_jTable2MouseClicked
 
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+
+    }//GEN-LAST:event_formWindowActivated
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if (jCBPesquisar.getSelectedIndex() == 0) {
+            jTFPesquisar.setEnabled(false);
+        } else if (jCBPesquisar.getSelectedIndex() != 0) {
+            jTFPesquisar.setEnabled(true);
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void jCBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPesquisarActionPerformed
+        if (jCBPesquisar.getSelectedIndex() == 0) {
+            jTFPesquisar.setText("");
+             new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
+            jTFPesquisar.setEnabled(false);
+        } else if (jCBPesquisar.getSelectedIndex() != 0) {
+            jTFPesquisar.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_jCBPesquisarActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAlterar;
     private javax.swing.JButton jButtonExcluir;
@@ -261,17 +307,18 @@ public class Janela_Generica extends javax.swing.JDialog {
     private void setSQl(int sql) {
         switch (sql) {
             case 1:
-                this.sql = "Select id_professor, nome, cpf, siape from Professor";
+                this.sql = "Select id_professor as Código, nome as Professor, cpf as CPF, siape as Siape from Professor";
                 break;
             case 2:
-                this.sql = "Select id_usuario, usuario, id_grupo from Usuario";
+                this.sql = "Select id_usuario as Código, usuario as Usuário, id_grupo as Grupo from Usuario";
                 break;
             case 3:
-                this.sql = "Select codigo, descricao, estatus from Equipamento";
+                this.sql = "Select codigo as Código, descricao as Equipamento, estatus as Status from Equipamento";
                 break;
             case 4:
-                this.sql = "Select codigo, descricao, graduacao, ano_letivo from Turma";
-                break;    
+                this.sql = "Select d.codigo as Código, d.disciplina as Disciplina, d.carga_horaria Horas, p.nome as Professor from Disciplina as d"
+                        + " left join professor as p on d.id_professor = p.id_professor";
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Não foi possível carregar a tabela!");
                 dispose();
