@@ -15,6 +15,7 @@ public class ADMJanelaCreator {
     public static final int cadastro_usuario = 2;
     public static final int cadastro_equipamento = 3;
     public static final int cadastro_Disciplina = 4;
+    public static final int cadastro_Cronograma = 5;
     
     public ADMJanelas creator(int janela){
         if (janela == ADMJanelaCreator.cadastro_professor){
@@ -25,6 +26,8 @@ public class ADMJanelaCreator {
             return new JanCad_Equipamento();
         }else if(janela == ADMJanelaCreator.cadastro_Disciplina){
             return new JanCad_Disciplina();
+        }else if(janela == ADMJanelaCreator.cadastro_Cronograma){
+            return new JanCad_Cronograma();
         }else{
             throw new IllegalArgumentException("Tipo de janela não encontrada");
         }          
