@@ -13,6 +13,7 @@ public class Disciplina {
  
     private long id;
     private String disciplina;
+    private String curso;
     private int semestre;
     private int carga_horaria;
     private Professor professor;
@@ -68,6 +69,14 @@ public class Disciplina {
 
     public void setSerie(int serie) {
         this.serie = serie;
+    }
+
+    public String getCurso() {
+        return curso;
+    }
+
+    public void setCurso(String curso) {
+        this.curso = curso;
     }
     
 }

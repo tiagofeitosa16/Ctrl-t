@@ -33,6 +33,7 @@ public class ControlDisciplina implements ControlPadrao {
         
         if (map.get("Semestre").toString() != ""){
             this.disciplina.setSemestre(Integer.parseInt(map.get("Semestre").toString()));
+            this.disciplina.setCurso(map.get("Curso").toString());
         }else{
             this.disciplina.setSerie(Integer.parseInt(map.get("Serie").toString()));
         }
@@ -69,6 +70,7 @@ public class ControlDisciplina implements ControlPadrao {
         
         if (map.get("Semestre").toString() != ""){
             this.disciplina.setSemestre(Integer.parseInt(map.get("Semestre").toString()));
+            this.disciplina.setCurso(map.get("Curso").toString());
         }else{
             this.disciplina.setSerie(Integer.parseInt(map.get("Serie").toString()));
         }
@@ -123,6 +125,7 @@ public class ControlDisciplina implements ControlPadrao {
             selecao.put("Carga_Horaria", this.disciplina.getCarga_horaria());
             selecao.put("Codigo_Professor", this.disciplina.getProfessor().getId());
             selecao.put("Nome_Professor", this.disciplina.getProfessor().getNome());
+            selecao.put("Curso", this.disciplina.getCurso());
             
             return selecao;
         }
@@ -132,7 +135,12 @@ public class ControlDisciplina implements ControlPadrao {
 
     @Override
     public void ControlPesquisar(int opcao, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if (DisciplinaDao == null) {
+            this.DisciplinaDao = new DisciplinaDAO();
+            
+        }
+        
+        this.DisciplinaDao.pesquisar(opcao, valor);
     }
    
 }
