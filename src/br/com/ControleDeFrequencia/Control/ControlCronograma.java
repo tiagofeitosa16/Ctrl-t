@@ -80,6 +80,8 @@ public class ControlCronograma implements ControlPadrao{
         
         this.aula = new Aula();
         
+        this.aula.setId(Long.parseLong(map.get("Codigo").toString()));
+        
         try{
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             Calendar cal = Calendar.getInstance();

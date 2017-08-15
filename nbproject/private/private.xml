@@ -2,6 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Aderbal%20Filho/Documents/NetBeansProjects/Ctrl-t/src/br/com/ControleDeFrequencia/DAO/AulaDAO.java</file>
+            <file>file:/C:/Users/Aderbal%20Filho/Documents/NetBeansProjects/Ctrl-t/src/br/com/ControleDeFrequencia/DAO/Conexao.java</file>
+            <file>file:/C:/Users/Aderbal%20Filho/Documents/NetBeansProjects/Ctrl-t/src/br/com/ControleDeFrequencia/View/Janela_Generica.java</file>
+            <file>file:/C:/Users/Aderbal%20Filho/Documents/NetBeansProjects/Ctrl-t/src/br/com/ControleDeFrequencia/View/JanCad_Cronograma.java</file>
+            <file>file:/C:/Users/Aderbal%20Filho/Documents/NetBeansProjects/Ctrl-t/src/br/com/ControleDeFrequencia/Control/ControlCronograma.java</file>
+        </group>
     </open-files>
 </project-private>

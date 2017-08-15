@@ -350,7 +350,7 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
             ControlCronograma cc = new ControlCronograma();
             
             if(Integer.parseInt(this.jLNumeroAula.getText()) > 0){
-                this.infoJanela.put("Codigo", String.valueOf(this.codigoAula));
+                this.infoJanela.put("Codigo", String.valueOf(this.jLNumeroAula.getText()));
                 
                 if (cc.ControlAlterar(this.infoJanela)){
                     JOptionPane.showMessageDialog(null, "Alteração realizada com sucesso!");
