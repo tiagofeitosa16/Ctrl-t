@@ -166,7 +166,12 @@ public class ControlCronograma implements ControlPadrao{
 
     @Override
     public void ControlPesquisar(int opcao, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    if (aulaDao == null) {
+            this.aulaDao = new AulaDAO();
+            
+        }
+        
+        this.aulaDao.pesquisar(opcao, valor);   
     }
     
 }
