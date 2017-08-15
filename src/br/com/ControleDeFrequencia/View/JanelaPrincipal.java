@@ -258,7 +258,7 @@ public class JanelaPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
-        String[]opcoes = {"Selecionar...","Disciplina","Data","Carga horária","Professor"};
+        String[]opcoes = {"Selecionar...","Disciplina","Professor","Data da Aula"};
         Janela_Generica janela = new Janela_Generica(5, "Cronograma", opcoes);
         janela.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed

@@ -165,7 +165,33 @@ public class AulaDAO implements PadraoDAO{
 
     @Override
     public void pesquisar(int opcao, String valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    String sqlTemp = "select a.id_aula, d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
+                        + "left join professor as p on d.id_professor = p.id_professor";
+        
+        switch (opcao){
+            case 1:
+                sqlTemp = sqlTemp.concat(" where d.disciplina like '%"+valor+"%'");
+                break;
+            case 2:
+                sqlTemp = sqlTemp.concat(" where p.nome like '%"+valor+"%'");
+                break;
+            case 3:
+                sqlTemp = sqlTemp.concat(" where a.Data_aula like '%"+valor+"%'");
+                break;
+            default:
+                break;
+        }
+        
+        try{
+            if (!valor.isEmpty()){
+                this.AtualizarTabela(sqlTemp);
+            }else{
+                this.AtualizarTabela("");
+            }
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }    
     }
 
     @Override
