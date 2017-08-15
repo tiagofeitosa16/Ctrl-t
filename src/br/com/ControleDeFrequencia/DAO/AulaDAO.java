@@ -143,7 +143,7 @@ public class AulaDAO implements PadraoDAO{
             
             Calendar cal2 = Calendar.getInstance();
             HoraFinal = this.rs.getTime(5);
-            cal1.setTime(HoraFinal);
+            cal2.setTime(HoraFinal);
             this.aula.setHora_termino(cal2);
             
             this.aula.setHoras_diarias(this.rs.getInt(6));

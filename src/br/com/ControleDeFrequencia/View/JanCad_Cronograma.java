@@ -413,11 +413,9 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
             SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
             Calendar DataAula = (Calendar) selecao.get("DataAula");
             jFTFDataAula.setText(sdfData.format(DataAula.getTime()));
-            
             SimpleDateFormat sdfTempo = new SimpleDateFormat("HH:mm");
             Calendar HoraInicio = (Calendar) selecao.get("HoraInicio");
             Calendar HoraTermino = (Calendar) selecao.get("HoraTermino");
-            
             jFTFHoraInicio.setText(sdfTempo.format(HoraInicio.getTime()));
             jFTFHoraTermino.setText(sdfTempo.format(HoraTermino.getTime()));
             
