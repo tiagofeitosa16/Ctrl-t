@@ -185,4 +185,24 @@ public class AulaDAO implements PadraoDAO{
         }
     }
     
+    public long intAuto() {
+        try {
+            sql = "SHOW TABLE STATUS LIKE 'equipamento'";
+            stmt = Conexao.getInstance().getConexao().prepareStatement(sql);
+            Long result;
+            
+            this.rs = stmt.executeQuery();
+            System.out.println(this.rs.getMetaData());
+            //result = this.rs.getLong("Auto_increment");
+            System.out.println(this.rs.findColumn("Auto_increment"));
+            Conexao.getInstance().fechaConexao(stmt);
+
+            return 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    
 }

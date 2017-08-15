@@ -30,6 +30,7 @@ public class Janela_Generica extends javax.swing.JDialog {
     private String sql;
     private int id;
     private String[] opcoes;
+    private boolean equi_classe = false;
 
     /**
      * Creates new form Janela_Generica
@@ -229,7 +230,7 @@ public class Janela_Generica extends javax.swing.JDialog {
             if ((jCBPesquisar.getSelectedIndex() != 0)) {
                 new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
             }
-        }else if((evt.getKeyCode() == KeyEvent.VK_BACKSPACE)){
+        } else if ((evt.getKeyCode() == KeyEvent.VK_BACKSPACE)) {
             if ((jCBPesquisar.getSelectedIndex() != 0)) {
                 new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
             }
@@ -263,9 +264,32 @@ public class Janela_Generica extends javax.swing.JDialog {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // TODO add your handling code here:
-        if (evt.getClickCount() == 2){
-            acaoAlterar();
-        }          
+        if (evt.getClickCount() == 2) {
+            if (equi_classe) {
+                /*int linha = jTable2.getSelectedRow();
+
+                if (linha > -1) { // Verificando de tem item selecionado
+                    Object value = jTable2.getValueAt(linha, 0);
+
+                    //ControlPadrao cp = new ADMControlPadrao().creator(this.id);
+
+                    //HashMap selecao = cp.ControlSelecionar(value);
+
+                    if (selecao != null) {
+                        this.cadJanela = new ADMJanelaCreator().creator(this.id);
+                        this.cadJanela.setValoresSelecao(selecao);
+                        this.cadJanela.mostrarJanela();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Não foi possivel selecionar o item!");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Selecione um item!");
+                }*/
+                dispose();
+            } else {
+                acaoAlterar();
+            }
+        }
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -283,12 +307,12 @@ public class Janela_Generica extends javax.swing.JDialog {
     private void jCBPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBPesquisarActionPerformed
         if (jCBPesquisar.getSelectedIndex() == 0) {
             jTFPesquisar.setText("");
-             new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
+            new ADMControlPadrao().creator(this.id).ControlPesquisar(jCBPesquisar.getSelectedIndex(), jTFPesquisar.getText());
             jTFPesquisar.setEnabled(false);
         } else if (jCBPesquisar.getSelectedIndex() != 0) {
             jTFPesquisar.setEnabled(true);
         }
-        
+
     }//GEN-LAST:event_jCBPesquisarActionPerformed
 
 
@@ -323,13 +347,17 @@ public class Janela_Generica extends javax.swing.JDialog {
                 this.sql = "select a.id_aula, d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
                         + "left join professor as p on d.id_professor = p.id_professor order by Data_aula";
                 break;
+            case 7:
+                this.sql = "Select codigo as Código, descricao as Equipamento, estatus as Status from Equipamento";
+                equi_classe = true;
+                break;
             default:
                 JOptionPane.showMessageDialog(null, "Não foi possível carregar a tabela!");
                 dispose();
         }
     }
-    
-    private void acaoAlterar(){
+
+    private void acaoAlterar() {
         int linha = jTable2.getSelectedRow();
 
         if (linha > -1) { // Verificando de tem item selecionado
@@ -350,6 +378,5 @@ public class Janela_Generica extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Selecione um item!");
         }
     }
-    
-}
 
+}

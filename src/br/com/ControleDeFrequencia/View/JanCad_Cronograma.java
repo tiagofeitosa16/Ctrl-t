@@ -7,6 +7,7 @@ package br.com.ControleDeFrequencia.View;
 
 import br.com.ControleDeFrequencia.Control.ControlDisciplina;
 import br.com.ControleDeFrequencia.Control.ControlCronograma;
+import br.com.ControleDeFrequencia.DAO.AulaDAO;
 import br.com.ControleDeFrequencia.Model.TableModelGeneric;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -36,7 +37,9 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
         this.setModal(true);
         sqlEquipamentos = sqlEquipamentos + " id_aula = "+String.valueOf(this.codigoAula);
         initComponents();
+        AulaDAO ad = new AulaDAO();
         this.jLNumeroAula.setText(String.valueOf(this.codigoAula));
+        //this.jLNumeroAula.setText(String.valueOf( ad.intAuto()));
         //preencherListaProfessores();
         preencherListaDisciplinas();
     }
@@ -323,6 +326,9 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        String[] opcoes = {"Selecione...","Código","Descrição","Status"};
+        Janela_Generica janela = new Janela_Generica(7,"Relação de Equipamentos", opcoes);
+        janela.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCBDisciplinaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jCBDisciplinaItemStateChanged
