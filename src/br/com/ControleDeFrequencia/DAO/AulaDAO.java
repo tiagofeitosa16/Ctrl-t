@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -39,8 +40,8 @@ public class AulaDAO implements PadraoDAO{
             stmt.setLong(1, this.aula.getDisciplina().getId());
             stmt.setDate(2, new java.sql.Date(this.aula.getData_aula().getTimeInMillis()));
             stmt.setInt(3, this.aula.getHoras_diarias());
-            stmt.setDate(4, new java.sql.Date(this.aula.getHora_inicio().getTimeInMillis()));
-            stmt.setDate(5, new java.sql.Date(this.aula.getHora_termino().getTimeInMillis()));
+            stmt.setTime(4, new java.sql.Time(this.aula.getHora_inicio().getTimeInMillis()));
+            stmt.setTime(5, new java.sql.Time(this.aula.getHora_termino().getTimeInMillis()));
             
             stmt.execute();
             
@@ -67,8 +68,8 @@ public class AulaDAO implements PadraoDAO{
             stmt.setLong(1, this.aula.getDisciplina().getId());
             stmt.setDate(2, new java.sql.Date(this.aula.getData_aula().getTimeInMillis()));
             stmt.setInt(3, this.aula.getHoras_diarias());
-            stmt.setDate(4, new java.sql.Date(this.aula.getHora_inicio().getTimeInMillis()));
-            stmt.setDate(5, new java.sql.Date(this.aula.getHora_termino().getTimeInMillis()));
+            stmt.setTime(4, new java.sql.Time(this.aula.getHora_inicio().getTimeInMillis()));
+            stmt.setTime(5, new java.sql.Time(this.aula.getHora_termino().getTimeInMillis()));
             stmt.setLong(6, this.aula.getId());
             stmt.execute();
             
@@ -132,23 +133,24 @@ public class AulaDAO implements PadraoDAO{
             
             this.aula.setDisciplina(this.disciplina);                       
             
-            Date HoraInicio, HoraFinal, DataAula;
+            Time HoraInicio, HoraFinal;
+            Date DataAula;
             
             Calendar cal1 = Calendar.getInstance();
-            HoraInicio = (Date) this.rs.getObject(4);
+            HoraInicio = this.rs.getTime(4);
             cal1.setTime(HoraInicio);
             this.aula.setHora_inicio(cal1);
             
             Calendar cal2 = Calendar.getInstance();
-            HoraFinal = (Date) this.rs.getObject(5);
+            HoraFinal = this.rs.getTime(5);
             cal1.setTime(HoraFinal);
             this.aula.setHora_termino(cal2);
             
             this.aula.setHoras_diarias(this.rs.getInt(6));
             
             Calendar cal3 = Calendar.getInstance();
-            HoraFinal = (Date) this.rs.getObject(7);
-            cal3.setTime(HoraFinal);
+            DataAula = this.rs.getDate(7);
+            cal3.setTime(DataAula);
             this.aula.setData_aula(cal3);
             
             Conexao.getInstance().fechaConexao(stmt);
@@ -170,7 +172,7 @@ public class AulaDAO implements PadraoDAO{
     public void AtualizarTabela(String sql) {
                 try {
             if (sql == ""){
-                Janela_Generica.tabelaModelo.setSQL("select d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
+                Janela_Generica.tabelaModelo.setSQL("select a.id_aula, d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
                         + "left join professor as p on d.id_professor = p.id_professor order by Data_aula");
             }else{
                 System.out.println(sql);

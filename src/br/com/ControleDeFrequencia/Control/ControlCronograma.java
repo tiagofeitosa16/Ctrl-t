@@ -90,7 +90,7 @@ public class ControlCronograma implements ControlPadrao{
         }
         
         try{
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Calendar cal = Calendar.getInstance();
             cal.setTime(sdf.parse((String) map.get("HoraInicio")));
             this.aula.setHora_inicio(cal);
@@ -99,7 +99,7 @@ public class ControlCronograma implements ControlPadrao{
         }
         
         try{
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             Calendar cal = Calendar.getInstance();
             cal.setTime(sdf.parse((String) map.get("HoraTermino")));
             this.aula.setHora_termino(cal);
@@ -146,7 +146,7 @@ public class ControlCronograma implements ControlPadrao{
         
         this.aula = (Aula) this.aulaDao.selecionar(id);
         
-        if (this.disciplina != null){
+        if (this.aula != null){
             HashMap selecao = new HashMap();
             selecao.put("codigo",  this.aula.getId());
             selecao.put("codigoDisciplina", this.aula.getDisciplina().getId());

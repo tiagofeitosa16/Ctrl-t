@@ -321,7 +321,7 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
             
             ControlCronograma cc = new ControlCronograma();
             
-            if(this.codigoAula > 0){
+            if(Integer.parseInt(this.jLNumeroAula.getText()) > 0){
                 this.infoJanela.put("Codigo", String.valueOf(this.codigoAula));
                 
                 if (cc.ControlAlterar(this.infoJanela)){
@@ -376,19 +376,19 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
 
     @Override
     public void setValoresSelecao(HashMap selecao) {
-        jLNumeroAula.setText(selecao.get("Codigo").toString());
-        jTFHorasDiarias.setText((String) selecao.get("HorasDiarias"));
-        jTFDisciplinaCodigo.setText((String) selecao.get("CodigoDisciplina"));
-        jCBDisciplina.setSelectedItem((String) selecao.get("NomeDisciplina"));
+        jLNumeroAula.setText(selecao.get("codigo").toString());
+        jTFHorasDiarias.setText(selecao.get("HorasDiarias").toString());
+        jTFDisciplinaCodigo.setText(selecao.get("codigoDisciplina").toString());
+        jCBDisciplina.setSelectedItem(selecao.get("nomeDisciplina").toString());
         
         try {
             SimpleDateFormat sdfData = new SimpleDateFormat("dd/MM/yyyy");
-            Calendar DataAula = (Calendar) selecao.get("nascimento");
+            Calendar DataAula = (Calendar) selecao.get("DataAula");
             jFTFDataAula.setText(sdfData.format(DataAula.getTime()));
             
             SimpleDateFormat sdfTempo = new SimpleDateFormat("HH:mm");
-            Calendar HoraInicio = (Calendar) selecao.get("cadastro");
-            Calendar HoraTermino = (Calendar) selecao.get("cadastro");
+            Calendar HoraInicio = (Calendar) selecao.get("HoraInicio");
+            Calendar HoraTermino = (Calendar) selecao.get("HoraTermino");
             
             jFTFHoraInicio.setText(sdfTempo.format(HoraInicio.getTime()));
             jFTFHoraTermino.setText(sdfTempo.format(HoraTermino.getTime()));

@@ -320,7 +320,7 @@ public class Janela_Generica extends javax.swing.JDialog {
                         + " left join professor as p on d.id_professor = p.id_professor";
                 break;
             case 5:
-                this.sql = "select d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
+                this.sql = "select a.id_aula, d.disciplina, p.nome, a.Data_aula, a.hora_inicio, a.hora_terminio from Aula as a inner join Disciplina as d on a.id_disciplina = d.codigo "
                         + "left join professor as p on d.id_professor = p.id_professor order by Data_aula";
                 break;
             default:
