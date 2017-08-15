@@ -254,6 +254,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTFHorasDiarias">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="try{ &#xa;    javax.swing.text.MaskFormatter horas_d= new javax.swing.text.MaskFormatter(&quot;##&quot;);&#xa;    horas_d.setPlaceholderCharacter(&apos;_&apos;);&#xa;    jTFHorasDiarias = new javax.swing.JFormattedTextField(horas_d);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -285,6 +288,10 @@
                   <Format subtype="0" type="1"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xd;&#xa;    javax.swing.text.MaskFormatter data_aula= new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;    data_aula.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;    jFTFDataAula = new javax.swing.JFormattedTextField(data_aula);&#xd;&#xa;}&#xd;&#xa;catch (Exception e){&#xd;&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="JanCad_Cronograma_jFTFDataAula"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jFTFHoraInicio">
               <Properties>
@@ -292,6 +299,9 @@
                   <Format subtype="1" type="2"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{ &#xa;    javax.swing.text.MaskFormatter horas= new javax.swing.text.MaskFormatter(&quot;##:##&quot;);&#xa;    horas.setPlaceholderCharacter(&apos;_&apos;);&#xa;    jFTFHoraInicio = new javax.swing.JFormattedTextField(horas);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jFTFHoraTermino">
               <Properties>
@@ -299,6 +309,9 @@
                   <Format subtype="1" type="2"/>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="try{&#xa;    javax.swing.text.MaskFormatter horas= new javax.swing.text.MaskFormatter(&quot;##:##&quot;);&#xa;    horas.setPlaceholderCharacter(&apos;_&apos;);&#xa;    jFTFHoraTermino = new javax.swing.JFormattedTextField(horas);&#xa;}&#xa;catch (Exception e){&#xa;}"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

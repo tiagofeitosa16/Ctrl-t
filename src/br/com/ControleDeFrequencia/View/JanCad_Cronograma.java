@@ -52,13 +52,20 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jCBDisciplina = new javax.swing.JComboBox<String>();
+        jCBDisciplina = new javax.swing.JComboBox<>();
         jTFDisciplinaCodigo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jPanelOpcoes = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTFHorasDiarias = new javax.swing.JTextField();
+        try{
+            javax.swing.text.MaskFormatter horas_d= new javax.swing.text.MaskFormatter("##");
+            horas_d.setPlaceholderCharacter('_');
+            jTFHorasDiarias = new javax.swing.JFormattedTextField(horas_d);
+        }
+        catch (Exception e){
+        }
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -136,10 +143,31 @@ public class JanCad_Cronograma extends javax.swing.JDialog implements ADMJanelas
         jLabel4.setText("Hora do termino");
 
         jFTFDataAula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        try{ 
+            javax.swing.text.MaskFormatter data_aula= new javax.swing.text.MaskFormatter("##/##/####");
+            data_aula.setPlaceholderCharacter('_');
+            jFTFDataAula = new javax.swing.JFormattedTextField(data_aula);
+        }
+        catch (Exception e){
+        }
 
         jFTFHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        try{
+            javax.swing.text.MaskFormatter horas= new javax.swing.text.MaskFormatter("##:##");
+            horas.setPlaceholderCharacter('_');
+            jFTFHoraInicio = new javax.swing.JFormattedTextField(horas);
+        }
+        catch (Exception e){
+        }
 
         jFTFHoraTermino.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
+        try{
+            javax.swing.text.MaskFormatter horas= new javax.swing.text.MaskFormatter("##:##");
+            horas.setPlaceholderCharacter('_');
+            jFTFHoraTermino = new javax.swing.JFormattedTextField(horas);
+        }
+        catch (Exception e){
+        }
 
         javax.swing.GroupLayout jPanelOpcoesLayout = new javax.swing.GroupLayout(jPanelOpcoes);
         jPanelOpcoes.setLayout(jPanelOpcoesLayout);
